@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <!-- Favicon usando logo.png -->
+  <link rel="icon" href="logo.png" type="image/png" />
 </head>
 <body>
   <header>
@@ -54,6 +54,11 @@
       <input type="text" name="nombre" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+
+      <!-- Captcha simple -->
+      <label for="captchaInput" id="captchaLabel" style="font-weight:bold; margin-top: 15px; display: block;">Resolver: </label>
+      <input type="number" id="captchaInput" placeholder="Escribe el resultado" required />
+
       <button type="submit">Enviar mensaje</button>
     </form>
 
@@ -67,8 +72,30 @@
   </footer>
 
   <script>
+    // Variables para el captcha
+    const captchaLabel = document.getElementById("captchaLabel");
+    const captchaInput = document.getElementById("captchaInput");
+
+    let num1, num2, resultado;
+
+    function generarCaptcha() {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+      resultado = num1 + num2;
+      captchaLabel.textContent = `Resolver: ${num1} + ${num2} = ?`;
+      captchaInput.value = "";
+    }
+
+    generarCaptcha();
+
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
+
+      if (parseInt(captchaInput.value, 10) !== resultado) {
+        alert("Respuesta incorrecta del captcha. Intenta de nuevo.");
+        generarCaptcha();
+        return;
+      }
 
       const formData = new FormData(this);
 
@@ -81,6 +108,7 @@
       }).then(response => {
         if (response.ok) {
           this.reset();
+          generarCaptcha(); // genera otro captcha para siguiente envío
           document.getElementById("mensaje-enviado").style.display = "block";
         } else {
           alert("Ocurrió un error al enviar el mensaje.");
@@ -92,7 +120,3 @@
   </script>
 </body>
 </html>
-
-
-
-
