@@ -2,12 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Iconic Studio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
@@ -55,10 +53,9 @@
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
       
-      <!-- Captcha -->
-      <label for="captchaInput">Por favor, escribe este número: <span id="captcha"></span></label>
-      <input type="text" id="captchaInput" placeholder="Escribe el número" required />
-      
+      <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
+      <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 8976" required pattern="\d{4}" maxlength="4" />
+
       <button type="submit">Enviar mensaje</button>
     </form>
 
@@ -67,37 +64,44 @@
     </div>
   </section>
 
-  <!-- Aviso de cookies -->
-  <div id="cookie-consent" class="cookie-consent" style="display:none;">
-    <p>Este sitio web utiliza cookies para mejorar tu experiencia. Al continuar navegando aceptas nuestra <a href="privacidad.html" target="_blank">Política de Privacidad</a> y el <a href="aviso-legal.html" target="_blank">Aviso Legal</a>.</p>
-    <button id="aceptar-cookies">Aceptar</button>
-  </div>
-
   <footer>
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
+  <!-- Aviso cookies -->
+  <div class="cookie-consent" id="cookie-consent" role="alert" aria-live="polite" aria-atomic="true">
+    <p>
+      Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestra
+      <a href="#" target="_blank" rel="noopener noreferrer">Política de privacidad</a> y
+      <a href="#" target="_blank" rel="noopener noreferrer">Aviso legal</a>.
+    </p>
+    <button id="btn-accept-cookies" aria-label="Aceptar cookies">Aceptar</button>
+  </div>
+
   <script>
-    // Generar captcha aleatorio de 4 números y mostrarlo
+    // CAPTCHA aleatorio de 4 dígitos
+    const captchaCodeEl = document.getElementById("captcha-code");
+    let currentCaptcha = '';
+
     function generarCaptcha() {
-      return Math.floor(1000 + Math.random() * 9000).toString();
+      currentCaptcha = '';
+      for(let i=0; i<4; i++) {
+        currentCaptcha += Math.floor(Math.random() * 10);
+      }
+      captchaCodeEl.textContent = currentCaptcha;
     }
 
-    const captchaElement = document.getElementById('captcha');
-    const captchaInput = document.getElementById('captchaInput');
-    let captchaCodigo = generarCaptcha();
-    captchaElement.textContent = captchaCodigo;
+    generarCaptcha();
 
-    // Validar formulario y captcha
+    // Validar formulario con captcha
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      if (captchaInput.value !== captchaCodigo) {
-        alert("Captcha incorrecto, por favor inténtalo de nuevo.");
-        captchaCodigo = generarCaptcha();
-        captchaElement.textContent = captchaCodigo;
-        captchaInput.value = "";
-        captchaInput.focus();
+      const captchaInput = document.getElementById("captcha-input").value.trim();
+
+      if(captchaInput !== currentCaptcha) {
+        alert("Captcha incorrecto. Por favor, introduce el número correcto.");
+        generarCaptcha(); // Regenerar captcha si falla
         return;
       }
 
@@ -112,56 +116,40 @@
       }).then(response => {
         if (response.ok) {
           this.reset();
-          captchaCodigo = generarCaptcha();
-          captchaElement.textContent = captchaCodigo;
+          generarCaptcha();
           document.getElementById("mensaje-enviado").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("mensaje-enviado").style.display = "none";
+          }, 5000);
         } else {
           alert("Ocurrió un error al enviar el mensaje.");
         }
-      }).catch(error => {
+      }).catch(() => {
         alert("Error al enviar el formulario. Intenta de nuevo.");
       });
     });
 
-    // Aviso de cookies
+    // Aviso cookies
     const cookieConsent = document.getElementById('cookie-consent');
-    const aceptarCookiesBtn = document.getElementById('aceptar-cookies');
-
-    function setCookie(name, value, days) {
-      const d = new Date();
-      d.setTime(d.getTime() + (days*24*60*60*1000));
-      const expires = "expires="+ d.toUTCString();
-      document.cookie = name + "=" + value + ";" + expires + ";path=/";
-    }
-
-    function getCookie(name) {
-      const cname = name + "=";
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const ca = decodedCookie.split(';');
-      for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1);
-        if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
-      }
-      return "";
-    }
+    const btnAcceptCookies = document.getElementById('btn-accept-cookies');
 
     function checkCookieConsent() {
-      const consent = getCookie("cookieConsent");
-      if (consent !== "accepted") {
-        cookieConsent.style.display = "flex";
-      }
+      return localStorage.getItem('cookieConsent') === 'true';
     }
 
-    aceptarCookiesBtn.addEventListener("click", () => {
-      setCookie("cookieConsent", "accepted", 365);
-      cookieConsent.style.display = "none";
-    });
+    function setCookieConsent() {
+      localStorage.setItem('cookieConsent', 'true');
+      cookieConsent.classList.add('hide');
+    }
 
-    // Comprobar si mostrar aviso cookies al cargar la página
-    window.onload = () => {
-      checkCookieConsent();
-    };
+    if(checkCookieConsent()) {
+      cookieConsent.style.display = 'none';
+    }
+
+    btnAcceptCookies.addEventListener('click', () => {
+      setCookieConsent();
+    });
   </script>
 </body>
 </html>
+
