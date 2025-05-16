@@ -1,104 +1,179 @@
+/* Fuente principal */
 body {
+  margin: 0;
   font-family: 'Orbitron', sans-serif;
-  background-color: #0b0b0b;
-  color: #70d0ff;
-  margin: 2rem;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Encabezado */
+header {
+  background-color: #111;
+  color: white;
+  padding: 20px 0;
   text-align: center;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
-
-form {
-  max-width: 400px;
-  margin: 0 auto;
+.header-container {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-input[type="text"],
-input[type="email"],
-textarea,
-#captcha-input {
-  background-color: #111111;
-  border: 2px solid #70d0ff;
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  color: #70d0ff;
-  outline: none;
-  transition: border-color 0.3s ease;
+.logo-img {
+  width: 80px;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus,
-#captcha-input:focus {
-  border-color: #2c99ff;
+.logo-img:hover {
+  transform: scale(1.1);
 }
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
-  font-family: 'Orbitron', monospace;
+.header-texto h1 {
+  margin: 0;
+  font-size: 2.2rem;
 }
 
-button[type="submit"] {
-  background-color: #70d0ff;
-  color: #0b0b0b;
+.header-texto p {
+  margin: 5px 0 0 0;
+  font-style: italic;
+}
+
+/* Responsive logo y textos header */
+@media (max-width: 600px) {
+  .logo-img {
+    width: 60px;
+  }
+  .header-texto h1 {
+    font-size: 1.5rem;
+  }
+  .header-texto p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Navegación */
+nav {
+  background-color: #222;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
   font-weight: bold;
-  font-size: 1.2rem;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #2c99ff;
-}
-
-#captcha-pregunta {
-  margin: 0 auto 0.3rem auto;
-  width: fit-content;
-  background: linear-gradient(135deg, #111111 20%, #0f313c 80%);
-  border: 1.5px solid #2c99ff;
-  border-radius: 16px;
-  padding: 14px 24px;
-  font-size: 2.5rem;
-  letter-spacing: 0.25em;
-  font-weight: 700;
-  color: #2c99ff;
-  font-family: 'Orbitron', monospace;
-  user-select: none;
-  box-shadow:
-    0 0 6px #2c99ff,
-    inset 0 0 5px #2c99ff,
-    0 0 15px #42aaff80;
-  text-shadow:
-    0 0 8px #2c99ff,
-    0 0 15px #42aaffaa;
-}
-
-#reload-captcha {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.7rem;
-  color: #2c99ff;
-  margin-bottom: 0.8rem;
   transition: color 0.3s ease;
 }
 
-#reload-captcha:hover {
-  color: #70d0ff;
+nav a:hover {
+  color: #00bfff;
 }
 
-label {
+/* Secciones generales */
+section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  color: #111;
+}
+
+/* Servicios */
+.servicio {
+  background-color: white;
+  border-left: 5px solid #00bfff;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Galería */
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.imagenes img {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.imagenes img:hover {
+  transform: scale(1.05);
+}
+
+/* Formulario de contacto */
+form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input,
+form textarea {
+  padding: 12px;
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
 }
 
+form input:focus,
+form textarea:focus {
+  border-color: #00bfff;
+  outline: none;
+}
+
+button {
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0099cc;
+}
+
+/* Estilo mejorado para el captcha */
+#captcha-pregunta {
+  background-color: #00bfff;
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  letter-spacing: 6px;
+  user-select: none;
+  box-shadow: 0 4px 8px rgba(0, 191, 255, 0.5);
+}
+
+/* Footer */
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+}
