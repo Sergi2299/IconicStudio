@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <!-- Favicon usando logo.png -->
+  <link rel="icon" type="image/png" href="logo.png" sizes="32x32" />
 </head>
 <body>
   <header>
@@ -54,6 +54,14 @@
       <input type="text" name="nombre" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+
+      <!-- Captcha numérico -->
+      <div class="captcha-container">
+        <label for="captchaInput">Introduce el número: <span id="captcha"></span></label>
+        <input type="text" id="captchaInput" name="captchaInput" placeholder="Ejemplo: 8976" required pattern="\\d{4}" title="Introduce los 4 dígitos que ves arriba" />
+        <button type="button" id="refreshCaptcha" title="Nuevo código captcha">&#x21bb;</button>
+      </div>
+
       <button type="submit">Enviar mensaje</button>
     </form>
 
@@ -67,8 +75,32 @@
   </footer>
 
   <script>
+    // Generar captcha aleatorio de 4 dígitos
+    function generarCaptcha() {
+      return Math.floor(1000 + Math.random() * 9000).toString();
+    }
+
+    // Mostrar captcha en pantalla
+    const captchaSpan = document.getElementById('captcha');
+    let captchaCode = generarCaptcha();
+    captchaSpan.textContent = captchaCode;
+
+    // Botón para refrescar captcha
+    document.getElementById('refreshCaptcha').addEventListener('click', () => {
+      captchaCode = generarCaptcha();
+      captchaSpan.textContent = captchaCode;
+      document.getElementById('captchaInput').value = '';
+    });
+
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
+
+      // Validar captcha
+      const userCaptcha = document.getElementById('captchaInput').value.trim();
+      if (userCaptcha !== captchaCode) {
+        alert("Captcha incorrecto. Por favor, introduce el número que ves.");
+        return;
+      }
 
       const formData = new FormData(this);
 
@@ -81,6 +113,8 @@
       }).then(response => {
         if (response.ok) {
           this.reset();
+          captchaCode = generarCaptcha();
+          captchaSpan.textContent = captchaCode;
           document.getElementById("mensaje-enviado").style.display = "block";
         } else {
           alert("Ocurrió un error al enviar el mensaje.");
@@ -92,4 +126,5 @@
   </script>
 </body>
 </html>
+
 
