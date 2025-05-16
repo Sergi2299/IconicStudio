@@ -1,104 +1,92 @@
-body {
-  font-family: 'Orbitron', sans-serif;
-  background-color: #0b0b0b;
-  color: #70d0ff;
-  margin: 2rem;
-  text-align: center;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Contáctanos</h1>
+  <form id="contact-form" onsubmit="return validarFormulario()">
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Tu nombre"
+      required
+      autocomplete="off"
+    />
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Tu email"
+      required
+      autocomplete="off"
+    />
+    <textarea
+      id="message"
+      name="message"
+      placeholder="Escribe tu mensaje..."
+      required
+      autocomplete="off"
+    ></textarea>
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
+    <label for="captcha-input" style="text-align:left; display:block; color:#70d0ff; margin-bottom: 6px;">
+      Escribe los números que ves abajo:
+    </label>
 
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+    <div id="captcha-pregunta"></div>
 
-input[type="text"],
-input[type="email"],
-textarea,
-#captcha-input {
-  background-color: #111111;
-  border: 2px solid #70d0ff;
-  border-radius: 10px;
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  color: #70d0ff;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
+    <button type="button" id="reload-captcha" title="Recargar captcha" aria-label="Recargar captcha">
+      🔄
+    </button>
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus,
-#captcha-input:focus {
-  border-color: #2c99ff;
-}
+    <input
+      type="text"
+      id="captcha-input"
+      name="captcha-input"
+      placeholder="Introduce números"
+      required
+      autocomplete="off"
+    />
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
-  font-family: 'Orbitron', monospace;
-}
+    <button type="submit">Enviar mensaje</button>
+  </form>
 
-button[type="submit"] {
-  background-color: #70d0ff;
-  color: #0b0b0b;
-  font-weight: bold;
-  font-size: 1.2rem;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  <script>
+    const captchaPregunta = document.getElementById("captcha-pregunta");
+    const captchaInput = document.getElementById("captcha-input");
+    const reloadBtn = document.getElementById("reload-captcha");
 
-button[type="submit"]:hover {
-  background-color: #2c99ff;
-}
+    let captchaCodigo = "";
 
-#captcha-pregunta {
-  margin: 0 auto 0.3rem auto;
-  width: fit-content;
-  background: linear-gradient(135deg, #111111 20%, #0f313c 80%);
-  border: 1.5px solid #2c99ff;
-  border-radius: 16px;
-  padding: 14px 24px;
-  font-size: 2.5rem;
-  letter-spacing: 0.25em;
-  font-weight: 700;
-  color: #2c99ff;
-  font-family: 'Orbitron', monospace;
-  user-select: none;
-  box-shadow:
-    0 0 6px #2c99ff,
-    inset 0 0 5px #2c99ff,
-    0 0 15px #42aaff80;
-  text-shadow:
-    0 0 8px #2c99ff,
-    0 0 15px #42aaffaa;
-}
+    function generarCaptcha() {
+      captchaCodigo = "";
+      for (let i = 0; i < 5; i++) {
+        captchaCodigo += Math.floor(Math.random() * 10);
+      }
+      captchaPregunta.textContent = captchaCodigo;
+      captchaInput.value = "";
+    }
 
-#reload-captcha {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.7rem;
-  color: #2c99ff;
-  margin-bottom: 0.8rem;
-  transition: color 0.3s ease;
-}
+    function validarFormulario() {
+      if (captchaInput.value !== captchaCodigo) {
+        alert("El captcha no coincide. Por favor, inténtalo de nuevo.");
+        generarCaptcha();
+        return false;
+      }
+      alert("Mensaje enviado correctamente!");
+      return true;
+    }
 
-#reload-captcha:hover {
-  color: #70d0ff;
-}
+    reloadBtn.addEventListener("click", generarCaptcha);
 
-label {
-  font-size: 1rem;
-}
+    window.onload = generarCaptcha;
+  </script>
+</body>
+</html>
 
