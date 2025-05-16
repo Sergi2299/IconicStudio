@@ -53,10 +53,11 @@
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
 
-      <!-- Redirige a la página gracias.html tras enviar -->
+      <!-- Google reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
+
+      <!-- Redirección tras envío -->
       <input type="hidden" name="_next" value="gracias.html" />
-      <!-- Desactiva el CAPTCHA -->
-      <input type="hidden" name="_captcha" value="false" />
 
       <button type="submit">Enviar mensaje</button>
     </form>
@@ -65,6 +66,10 @@
   <footer>
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
+
+  <!-- Script de Google reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
+
 
