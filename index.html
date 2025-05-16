@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <!-- Favicon cambiado -->
+  <link rel="icon" type="image/png" href="logo.png" sizes="32x32" />
 </head>
 <body>
   <header>
@@ -54,6 +54,13 @@
       <input type="text" name="nombre" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+
+      <!-- CAPTCHA -->
+      <div class="captcha-box">
+        <label id="captcha-pregunta"></label>
+        <input type="text" id="captcha-respuesta" placeholder="Respuesta" required />
+      </div>
+
       <button type="submit">Enviar mensaje</button>
     </form>
 
@@ -67,8 +74,25 @@
   </footer>
 
   <script>
+    function generarCaptcha() {
+      const num1 = Math.floor(Math.random() * 10 + 1);
+      const num2 = Math.floor(Math.random() * 10 + 1);
+      const resultado = num1 + num2;
+      document.getElementById("captcha-pregunta").textContent = `¿Cuánto es ${num1} + ${num2}?`;
+      return resultado;
+    }
+
+    let resultadoCaptcha = generarCaptcha();
+
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
+
+      const respuestaUsuario = parseInt(document.getElementById("captcha-respuesta").value);
+      if (respuestaUsuario !== resultadoCaptcha) {
+        alert("Respuesta incorrecta al CAPTCHA.");
+        resultadoCaptcha = generarCaptcha(); // Generar otro
+        return;
+      }
 
       const formData = new FormData(this);
 
@@ -82,6 +106,7 @@
         if (response.ok) {
           this.reset();
           document.getElementById("mensaje-enviado").style.display = "block";
+          resultadoCaptcha = generarCaptcha(); // Nuevo CAPTCHA
         } else {
           alert("Ocurrió un error al enviar el mensaje.");
         }
