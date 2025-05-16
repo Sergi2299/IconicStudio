@@ -156,6 +156,19 @@ button:hover {
   background-color: #0099cc;
 }
 
+/* Estilo mejorado para el captcha */
+#captcha-pregunta {
+  background-color: #00bfff;
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  letter-spacing: 6px;
+  user-select: none;
+  box-shadow: 0 4px 8px rgba(0, 191, 255, 0.5);
+}
+
 /* Footer */
 footer {
   background-color: #111;
@@ -164,4 +177,3 @@ footer {
   padding: 15px;
   font-size: 0.9rem;
 }
-
