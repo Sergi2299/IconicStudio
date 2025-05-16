@@ -1,179 +1,151 @@
-/* Fuente principal */
+/* Estilos generales */
 body {
-  margin: 0;
   font-family: 'Orbitron', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-/* Encabezado */
-header {
-  background-color: #111;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.logo-img {
-  width: 80px;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-.logo-img:hover {
-  transform: scale(1.1);
-}
-
-.header-texto h1 {
+  background-color: #0d0d0d;
+  color: #70d0ff;
   margin: 0;
-  font-size: 2.2rem;
-}
-
-.header-texto p {
-  margin: 5px 0 0 0;
-  font-style: italic;
-}
-
-/* Responsive logo y textos header */
-@media (max-width: 600px) {
-  .logo-img {
-    width: 60px;
-  }
-  .header-texto h1 {
-    font-size: 1.5rem;
-  }
-  .header-texto p {
-    font-size: 0.9rem;
-  }
-}
-
-/* Navegación */
-nav {
-  background-color: #222;
-  padding: 10px 0;
-  text-align: center;
-}
-
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: #00bfff;
-}
-
-/* Secciones generales */
-section {
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
-  color: #111;
-}
-
-/* Servicios */
-.servicio {
-  background-color: white;
-  border-left: 5px solid #00bfff;
   padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-/* Galería */
-.imagenes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #70d0ff;
 }
 
-.imagenes img {
-  width: 250px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-}
-
-.imagenes img:hover {
-  transform: scale(1.05);
-}
-
-/* Formulario de contacto */
 form {
-  max-width: 600px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-form input,
-form textarea {
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  background-color: #f9f9f9;
+  color: #111;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 8px #70d0ff;
+  background-color: #d3f0ff;
+}
+
+textarea {
+  height: 120px;
+  resize: vertical;
   font-family: 'Orbitron', sans-serif;
 }
 
-form input:focus,
-form textarea:focus {
-  border-color: #00bfff;
-  outline: none;
+label {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  display: block;
+  color: #70d0ff;
+  text-align: left;
 }
 
 button {
-  background-color: #00bfff;
-  color: white;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.3rem;
+  background-color: #70d0ff;
   border: none;
-  padding: 12px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
   transition: background-color 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+  color: #000;
 }
 
 button:hover {
-  background-color: #0099cc;
+  background-color: #4ba7db;
 }
 
-/* Estilo mejorado para el captcha */
+/* Estilo específico para el captcha */
+
 #captcha-pregunta {
-  background-color: #00bfff;
-  color: white;
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.5rem;
+  color: #3ec9ff;
+  background-color: #1c1c1c;
+  width: fit-content;
+  padding: 10px 20px;
   border-radius: 8px;
-  letter-spacing: 6px;
   user-select: none;
-  box-shadow: 0 4px 8px rgba(0, 191, 255, 0.5);
+  position: relative;
+  box-shadow: 0 0 8px #3ec9ff80;
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Footer */
-footer {
-  background-color: #111;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  font-size: 0.9rem;
+/* Líneas diagonales para el captcha */
+#captcha-pregunta::before,
+#captcha-pregunta::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 2px;
+  background: #3ec9ff88;
+  top: 30%;
+  left: -10%;
+  transform: rotate(15deg);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+#captcha-pregunta::after {
+  top: 60%;
+  transform: rotate(-15deg);
+}
+
+/* Botón recargar captcha */
+#reload-captcha {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #70d0ff;
+  transition: color 0.3s ease;
+}
+
+#reload-captcha:hover {
+  color: #3ec9ff;
+}
+
+/* Input captcha */
+#captcha-input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  background-color: #f9f9f9;
+  color: #111;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+
+#captcha-input:focus {
+  outline: none;
+  box-shadow: 0 0 8px #70d0ff;
+  background-color: #d3f0ff;
 }
