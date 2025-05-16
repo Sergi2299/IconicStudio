@@ -56,8 +56,12 @@
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
 
       <!-- Captcha -->
-      <div style="margin-bottom: 10px; font-weight: bold;" id="captcha-pregunta"></div>
+      <div id="captcha-container">
+        <div id="captcha-pregunta" class="captcha-box"></div>
+        <button type="button" id="boton-captcha">🔄 Cambiar código</button>
+      </div>
       <input type="text" id="captcha-respuesta" placeholder="Escribe los números aquí" required />
+      <div id="error-captcha" class="error-mensaje"></div>
 
       <button type="submit">Enviar mensaje</button>
     </form>
@@ -77,23 +81,40 @@
       for (let i = 0; i < 4; i++) {
         numeros.push(Math.floor(Math.random() * 10));
       }
-      document.getElementById("captcha-pregunta").textContent =
-        "Escribe estos números: " + numeros.join(" ");
-      return numeros.join("");
+      const codigo = numeros.join("");
+      const captchaTexto = numeros.join(" ");
+      const captchaElemento = document.getElementById("captcha-pregunta");
+
+      captchaElemento.style.opacity = 0;
+      setTimeout(() => {
+        captchaElemento.textContent = captchaTexto;
+        captchaElemento.style.opacity = 1;
+      }, 200);
+
+      return codigo;
     }
 
     let codigoCorrecto = generarCaptcha();
 
+    document.getElementById("boton-captcha").addEventListener("click", () => {
+      codigoCorrecto = generarCaptcha();
+      document.getElementById("captcha-respuesta").value = "";
+      document.getElementById("error-captcha").textContent = "";
+    });
+
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
       const respuestaUsuario = document.getElementById("captcha-respuesta").value.trim();
+      const errorCaptcha = document.getElementById("error-captcha");
 
       if (respuestaUsuario !== codigoCorrecto) {
-        alert("Los números introducidos no son correctos. Intenta de nuevo.");
-        codigoCorrecto = generarCaptcha(); // Generar otro
+        errorCaptcha.textContent = "Los números introducidos no son correctos. Intenta de nuevo.";
+        codigoCorrecto = generarCaptcha();
         document.getElementById("captcha-respuesta").value = "";
         return;
       }
+
+      errorCaptcha.textContent = "";
 
       const formData = new FormData(this);
 
@@ -107,7 +128,7 @@
         if (response.ok) {
           this.reset();
           document.getElementById("mensaje-enviado").style.display = "block";
-          codigoCorrecto = generarCaptcha(); // Nuevo CAPTCHA
+          codigoCorrecto = generarCaptcha();
         } else {
           alert("Ocurrió un error al enviar el mensaje.");
         }
