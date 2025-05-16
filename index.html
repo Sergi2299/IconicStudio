@@ -2,78 +2,195 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SaV - Sergi and Videogames</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iconic Studio</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" type="image/png" href="logo.png" sizes="32x32" />
+  <style>
+    /* Solo estilos extra para el captcha */
+    #captchaCanvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin: 10px 0;
+      background: #222;
+      border-radius: 5px;
+    }
+    #captcha-container {
+      margin-top: 10px;
+      color: #ccc;
+      font-family: Arial, sans-serif;
+    }
+    #reloadCaptcha {
+      cursor: pointer;
+      color: #0af;
+      font-size: 0.9rem;
+      margin-left: 8px;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-
     <header>
       <div class="header-container">
-        <img src="logo.png" alt="Logo SaV" class="logo-img" />
+        <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
         <div class="header-texto">
-          <h1>SaV - Sergi and Videogames</h1>
-          <p>Tu tienda online de videojuegos favorita</p>
+          <h1>Iconic Studio</h1>
+          <p>Tu imagina, nosotros creamos</p>
         </div>
       </div>
     </header>
 
     <nav>
-      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
       <a href="#galeria">Galería</a>
-      <a href="#presupuesto">Presupuesto</a>
       <a href="#contacto">Contacto</a>
     </nav>
 
-    <section id="inicio">
-      <h2>Bienvenido a SaV</h2>
-      <p>En SaV encontrarás los mejores juegos para Nintendo Switch con las ofertas más increíbles y un servicio de atención personalizado.</p>
-    </section>
-
-    <section id="galeria">
-      <h2>Galería de Juegos</h2>
-      <div class="imagenes">
-        <img src="juego1.jpg" alt="Juego 1" />
-        <img src="juego2.jpg" alt="Juego 2" />
-        <img src="juego3.jpg" alt="Juego 3" />
+    <section id="servicios">
+      <h2>¿Qué ofrecemos?</h2>
+      <div class="servicio">
+        <h3>Diseño de logos</h3>
+        <p>Diseñamos tu logo profesional desde cero, con estilo moderno y adaptado a tu marca.</p>
+      </div>
+      <div class="servicio">
+        <h3>Creación de páginas web</h3>
+        <p>Desarrollamos páginas responsive y atractivas para empresas, autónomos o emprendedores.</p>
       </div>
     </section>
 
-    <section id="presupuesto">
-      <h2>Solicita un Presupuesto</h2>
-      <form action="#" method="post">
-        <input type="text" name="nombre" placeholder="Tu nombre" required />
-        <input type="email" name="email" placeholder="Tu correo electrónico" required />
-        <textarea name="mensaje" rows="4" placeholder="¿Qué juegos o servicios quieres?" required></textarea>
-        <button type="submit">Enviar solicitud</button>
-      </form>
+    <section id="galeria">
+      <h2>Proyectos recientes</h2>
+      <div class="imagenes">
+        <img src="logo1.jpg" alt="Logo 1" />
+        <img src="logo2.jpg" alt="Logo 2" />
+        <img src="logo3.png" alt="Logo 3" />
+      </div>
     </section>
 
     <section id="contacto">
-      <h2>Contacto</h2>
-      <p>Estamos ubicados en Alcoy, Alicante, España. ¡Ven a visitarnos o escríbenos!</p>
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.479956962186!2d-0.4746792846074283!3d38.69398487964667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd62364d99c27e7f%3A0x7c86f0b6bcd38e11!2sAlcoy!5e0!3m2!1ses!2ses!4v1684700000000!5m2!1ses!2ses" 
-        width="100%" height="300" style="border:0; border-radius:15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <h2>Contáctanos</h2>
+      <form id="formulario-contacto">
+        <input type="text" name="nombre" placeholder="Tu nombre" required />
+        <input type="email" name="email" placeholder="Tu email" required />
+        <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+
+        <div id="captcha-container">
+          <label for="captchaInput">Escribe los números que ves abajo:</label>
+          <canvas id="captchaCanvas" width="120" height="40" aria-label="captcha con números"></canvas>
+          <span id="reloadCaptcha" title="Recargar captcha">🔄</span>
+          <input
+            type="text"
+            id="captchaInput"
+            name="captchaRespuesta"
+            placeholder="Introduce números"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+
+      <div id="mensaje-enviado" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
+        ¡Gracias por confiar en nosotros! En breves te contactaremos.
+      </div>
     </section>
 
     <footer>
-      <p>© 2025 SaV - Sergi and Videogames. Todos los derechos reservados.</p>
-      <p>
-        Síguenos en 
-        <a href="#" style="color:#4a90e2; text-decoration:none;">Twitter</a>, 
-        <a href="#" style="color:#4a90e2; text-decoration:none;">Facebook</a> y 
-        <a href="#" style="color:#4a90e2; text-decoration:none;">Instagram</a>
-      </p>
+      &copy; 2025 Iconic Studio. Todos los derechos reservados.
     </footer>
-
   </div>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('captchaCanvas');
+      const ctx = canvas.getContext('2d');
+      const reloadBtn = document.getElementById('reloadCaptcha');
+      let captchaValue = '';
+
+      function generarCaptcha() {
+        captchaValue = '';
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Fondo
+        ctx.fillStyle = '#222';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Generar 5 números aleatorios
+        for (let i = 0; i < 5; i++) {
+          captchaValue += Math.floor(Math.random() * 10);
+        }
+
+        // Dibujar números con estilo
+        ctx.font = '28px Orbitron, monospace';
+        ctx.fillStyle = '#0af';
+        ctx.textBaseline = 'middle';
+
+        // Añadir números con cierta variación de posición y rotación para dificultad
+        for (let i = 0; i < captchaValue.length; i++) {
+          const x = 10 + i * 22;
+          const y = canvas.height / 2;
+          const angle = (Math.random() - 0.5) * 0.4; // rotar ±0.2 rad
+
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(angle);
+          ctx.fillText(captchaValue[i], 0, 0);
+          ctx.restore();
+        }
+
+        // Añadir ruido (líneas)
+        for (let i = 0; i < 5; i++) {
+          ctx.strokeStyle = `rgba(0, 170, 255, 0.3)`;
+          ctx.beginPath();
+          ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+          ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+          ctx.stroke();
+        }
+      }
+
+      generarCaptcha();
+
+      reloadBtn.addEventListener('click', () => {
+        generarCaptcha();
+      });
+
+      document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const inputVal = document.getElementById("captchaInput").value.trim();
+
+        if (inputVal !== captchaValue) {
+          alert("Captcha incorrecto. Por favor, escribe los números que ves en la imagen.");
+          return;
+        }
+
+        const formData = new FormData(this);
+
+        fetch("https://formsubmit.co/ajax/sergifenollar88@gmail.com", {
+          method: "POST",
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        }).then(response => {
+          if (response.ok) {
+            this.reset();
+            document.getElementById("mensaje-enviado").style.display = "block";
+            generarCaptcha(); // renovar captcha tras envío correcto
+          } else {
+            alert("Ocurrió un error al enviar el mensaje.");
+          }
+        }).catch(error => {
+          alert("Error al enviar el formulario. Intenta de nuevo.");
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
-
 
 
 
