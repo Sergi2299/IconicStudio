@@ -156,11 +156,13 @@ button:hover {
   background-color: #0099cc;
 }
 
-/* Footer */
-footer {
-  background-color: #111;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  font-size: 0.9rem;
+/* Estilos para captcha */
+#captcha-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
+
+.captcha-box {
+  background-color: #222;
