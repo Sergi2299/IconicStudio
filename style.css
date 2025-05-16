@@ -123,6 +123,10 @@ form textarea:focus {
   outline: none;
 }
 
+.g-recaptcha {
+  margin-top: 10px;
+}
+
 button {
   background-color: #00bfff;
   color: white;
