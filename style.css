@@ -156,6 +156,15 @@ button:hover {
   background-color: #0099cc;
 }
 
+/* CAPTCHA */
+.captcha-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 /* Footer */
 footer {
   background-color: #111;
