@@ -1,4 +1,4 @@
-/* Fuente principal */
+/* General */
 body {
   margin: 0;
   font-family: 'Orbitron', sans-serif;
@@ -6,7 +6,7 @@ body {
   color: #333;
 }
 
-/* Encabezado */
+/* Header */
 header {
   background-color: #111;
   color: white;
@@ -18,13 +18,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .logo-img {
   width: 80px;
-  height: auto;
   transition: transform 0.3s ease;
 }
 
@@ -34,7 +33,7 @@ header {
 
 .header-texto h1 {
   margin: 0;
-  font-size: 2.2rem;
+  font-size: 2rem;
 }
 
 .header-texto p {
@@ -42,24 +41,11 @@ header {
   font-style: italic;
 }
 
-/* Responsive logo y textos header */
-@media (max-width: 600px) {
-  .logo-img {
-    width: 60px;
-  }
-  .header-texto h1 {
-    font-size: 1.5rem;
-  }
-  .header-texto p {
-    font-size: 0.9rem;
-  }
-}
-
-/* Navegación */
+/* Nav */
 nav {
   background-color: #222;
-  padding: 10px 0;
   text-align: center;
+  padding: 10px 0;
 }
 
 nav a {
@@ -67,14 +53,13 @@ nav a {
   margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s ease;
 }
 
 nav a:hover {
   color: #00bfff;
 }
 
-/* Secciones generales */
+/* Secciones */
 section {
   padding: 40px 20px;
   max-width: 1000px;
@@ -85,14 +70,13 @@ h2 {
   text-align: center;
   margin-bottom: 30px;
   font-size: 1.8rem;
-  color: #111;
 }
 
 /* Servicios */
 .servicio {
-  background-color: white;
-  border-left: 5px solid #00bfff;
+  background: white;
   padding: 20px;
+  border-left: 5px solid #00bfff;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -100,16 +84,15 @@ h2 {
 /* Galería */
 .imagenes {
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
 }
 
 .imagenes img {
   width: 250px;
-  height: auto;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: transform 0.3s ease;
 }
 
@@ -117,7 +100,7 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Formulario de contacto */
+/* Formulario */
 form {
   max-width: 600px;
   margin: auto;
@@ -126,124 +109,85 @@ form {
   gap: 15px;
 }
 
-form input,
-form textarea {
+form input, form textarea {
   padding: 12px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-family: 'Orbitron', sans-serif;
 }
 
-form input:focus,
-form textarea:focus {
-  border-color: #00bfff;
-  outline: none;
-}
-
-.captcha-label {
-  font-weight: bold;
-  font-size: 1rem;
-  color: #111;
-}
-
-/* Botón */
 button {
+  padding: 12px;
   background-color: #00bfff;
   color: white;
   border: none;
-  padding: 12px;
-  font-size: 1rem;
-  cursor: pointer;
+  font-weight: bold;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 button:hover {
   background-color: #0099cc;
 }
 
-/* Footer */
+.captcha-label {
+  font-weight: bold;
+}
+
 footer {
   background-color: #111;
   color: white;
   text-align: center;
   padding: 15px;
-  font-size: 0.9rem;
 }
 
 /* Modal cookies */
-.cookie-modal {
+.cookie-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
+  background-color: rgba(0,0,0,0.7);
+  display: none;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
+  z-index: 9999;
 }
 
 .cookie-modal-content {
   background: white;
-  color: #111;
   padding: 30px;
   max-width: 500px;
   width: 90%;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  font-family: 'Orbitron', sans-serif;
 }
 
 .cookie-modal-content h2 {
   margin-top: 0;
-  margin-bottom: 15px;
-}
-
-.cookie-modal-content p {
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
 .cookie-modal-content a {
   color: #00bfff;
-  text-decoration: underline;
 }
 
 .cookie-buttons {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
   flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .cookie-buttons button {
-  background-color: #004466;
-  color: white;
-  border: none;
   padding: 10px 20px;
   border-radius: 20px;
+  border: none;
+  background-color: #004466;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease;
 }
 
 .cookie-buttons button:hover {
   background-color: #006699;
 }
 
-.cookie-modal.hide {
-  display: none;
-}
-
-@media (max-width: 500px) {
-  .cookie-buttons {
-    flex-direction: column;
-  }
-
-  .cookie-buttons button {
-    width: 100%;
-  }
-}
