@@ -6,26 +6,9 @@
   <title>Iconic Studio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
-  <!-- Modal de privacidad -->
-  <div class="modal-overlay" id="modal-privacidad">
-    <div class="modal-content">
-      <h2>Política de Privacidad y Cookies</h2>
-      <p>Usamos cookies para mejorar tu experiencia. Puedes leer nuestra 
-        <a href="#" target="_blank">Política de Privacidad</a>, 
-        <a href="#" target="_blank">Cookies</a> y 
-        <a href="#" target="_blank">Términos y Condiciones</a>.
-      </p>
-      <div class="modal-buttons">
-        <button id="aceptar">Aceptar</button>
-        <button id="rechazar">Rechazar</button>
-        <button id="configurar">Configurar preferencias</button>
-      </div>
-    </div>
-  </div>
-
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
@@ -85,14 +68,24 @@
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
+  <!-- Aviso cookies -->
+  <div class="cookie-consent" id="cookie-consent" role="alert" aria-live="polite" aria-atomic="true">
+    <p>
+      Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestra
+      <a href="#" target="_blank" rel="noopener noreferrer">Política de privacidad</a> y
+      <a href="#" target="_blank" rel="noopener noreferrer">Aviso legal</a>.
+    </p>
+    <button id="btn-accept-cookies" aria-label="Aceptar cookies">Aceptar</button>
+  </div>
+
   <script>
-    // CAPTCHA
+    // CAPTCHA aleatorio de 4 dígitos
     const captchaCodeEl = document.getElementById("captcha-code");
-    let currentCaptcha = "";
+    let currentCaptcha = '';
 
     function generarCaptcha() {
-      currentCaptcha = "";
-      for (let i = 0; i < 4; i++) {
+      currentCaptcha = '';
+      for(let i=0; i<4; i++) {
         currentCaptcha += Math.floor(Math.random() * 10);
       }
       captchaCodeEl.textContent = currentCaptcha;
@@ -100,13 +93,15 @@
 
     generarCaptcha();
 
+    // Validar formulario con captcha
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const captchaInput = document.getElementById("captcha-input").value.trim();
-      if (captchaInput !== currentCaptcha) {
-        alert("Captcha incorrecto.");
-        generarCaptcha();
+
+      if(captchaInput !== currentCaptcha) {
+        alert("Captcha incorrecto. Por favor, introduce el número correcto.");
+        generarCaptcha(); // Regenerar captcha si falla
         return;
       }
 
@@ -127,44 +122,33 @@
             document.getElementById("mensaje-enviado").style.display = "none";
           }, 5000);
         } else {
-          alert("Error al enviar el mensaje.");
+          alert("Ocurrió un error al enviar el mensaje.");
         }
       }).catch(() => {
-        alert("Error al enviar el formulario.");
+        alert("Error al enviar el formulario. Intenta de nuevo.");
       });
     });
 
-    // MODAL cookies / privacidad
-    const modal = document.getElementById('modal-privacidad');
-    const btnAceptar = document.getElementById('aceptar');
-    const btnRechazar = document.getElementById('rechazar');
-    const btnConfigurar = document.getElementById('configurar');
+    // Aviso cookies
+    const cookieConsent = document.getElementById('cookie-consent');
+    const btnAcceptCookies = document.getElementById('btn-accept-cookies');
 
-    function ocultarModal() {
-      modal.style.display = "none";
-      document.body.style.overflow = "auto";
+    function checkCookieConsent() {
+      return localStorage.getItem('cookieConsent') === 'true';
     }
 
-    if (!localStorage.getItem('privacidadAceptada')) {
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden";
+    function setCookieConsent() {
+      localStorage.setItem('cookieConsent', 'true');
+      cookieConsent.classList.add('hide');
     }
 
-    btnAceptar.addEventListener("click", () => {
-      localStorage.setItem('privacidadAceptada', 'true');
-      ocultarModal();
-    });
+    if(checkCookieConsent()) {
+      cookieConsent.style.display = 'none';
+    }
 
-    btnRechazar.addEventListener("click", () => {
-      localStorage.setItem('privacidadAceptada', 'rechazada');
-      ocultarModal();
-    });
-
-    btnConfigurar.addEventListener("click", () => {
-      alert("Aquí se podrían configurar preferencias avanzadas (no implementado).");
+    btnAcceptCookies.addEventListener('click', () => {
+      setCookieConsent();
     });
   </script>
 </body>
 </html>
-
-
