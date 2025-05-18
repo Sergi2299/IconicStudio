@@ -6,6 +6,80 @@ body {
   color: #333;
 }
 
+/* Modal cookies */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.modal-content a {
+  color: #00bfff;
+  text-decoration: underline;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+}
+
+#accept-cookies {
+  background-color: #00bfff;
+  color: white;
+}
+
+#reject-cookies {
+  background-color: #777;
+  color: white;
+}
+
+#config-cookies {
+  background-color: #ccc;
+  color: #111;
+}
+
+.modal-buttons button:hover {
+  opacity: 0.9;
+}
+
 /* Encabezado */
 header {
   background-color: #111;
@@ -42,7 +116,7 @@ header {
   font-style: italic;
 }
 
-/* Responsive logo y textos header */
+/* Responsive header */
 @media (max-width: 600px) {
   .logo-img {
     width: 60px;
@@ -74,7 +148,7 @@ nav a:hover {
   color: #00bfff;
 }
 
-/* Secciones generales */
+/* Secciones */
 section {
   padding: 40px 20px;
   max-width: 1000px;
@@ -117,7 +191,7 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Formulario de contacto */
+/* Formulario */
 form {
   max-width: 600px;
   margin: auto;
@@ -147,8 +221,7 @@ form textarea:focus {
   color: #111;
 }
 
-/* Botón */
-button {
+button[type="submit"] {
   background-color: #00bfff;
   color: white;
   border: none;
@@ -159,7 +232,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+button[type="submit"]:hover {
   background-color: #0099cc;
 }
 
@@ -170,96 +243,4 @@ footer {
   text-align: center;
   padding: 15px;
   font-size: 0.9rem;
-}
-
-/* -------------------------------------- */
-/* VENTANA MODAL LEGAL - CENTRADA Y FIJA */
-/* -------------------------------------- */
-
-.ventana-legal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  color: #111;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-  z-index: 10000;
-  width: 90%;
-  max-width: 500px;
-  display: none;
-  flex-direction: column;
-  gap: 20px;
-  text-align: center;
-  font-family: 'Orbitron', sans-serif;
-}
-
-.ventana-legal.mostrar {
-  display: flex;
-}
-
-.ventana-contenido h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-}
-
-.ventana-contenido p {
-  font-size: 1rem;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.botones-legales {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.botones-legales button {
-  background-color: #004466;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  min-width: 100px;
-}
-
-.botones-legales button:hover {
-  background-color: #006699;
-}
-
-.enlaces-legales {
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.enlaces-legales a {
-  color: #00bfff;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-.enlaces-legales a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive ventana legal */
-@media (max-width: 500px) {
-  .ventana-legal {
-    padding: 20px;
-  }
-
-  .botones-legales {
-    flex-direction: column;
-  }
-
-  .botones-legales button {
-    width: 100%;
-  }
 }
