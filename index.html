@@ -9,13 +9,13 @@
 </head>
 <body>
 
-  <!-- Encabezado -->
+  <!-- Encabezado con imagen + eslogan -->
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
       <div class="header-texto">
         <h1>Iconic Studio</h1>
-        <p>Tu imagina, nosotros creamos</p>
+        <p>Tú imagina, nosotros creamos</p>
       </div>
     </div>
   </header>
@@ -27,21 +27,24 @@
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <!-- Secciones -->
+  <!-- Sección de Servicios -->
   <section id="servicios">
     <h2>Servicios</h2>
-    <div class="servicio">Diseño de logos profesionales.</div>
-    <div class="servicio">Identidad visual y branding.</div>
+    <div class="servicio">Diseño de logos profesionales, creativos y personalizados.</div>
+    <div class="servicio">Identidad visual completa: tarjetas, branding y más.</div>
   </section>
 
+  <!-- Galería -->
   <section id="galeria">
     <h2>Galería</h2>
     <div class="imagenes">
-      <img src="logo1.jpg" alt="Logo 1" />
-      <img src="logo2.jpg" alt="Logo 2" />
+      <img src="logo1.jpg" alt="Logo de ejemplo 1" />
+      <img src="logo2.jpg" alt="Logo de ejemplo 2" />
+      <img src="logo3.jpg" alt="Logo de ejemplo 3" />
     </div>
   </section>
 
+  <!-- Formulario de Contacto -->
   <section id="contacto">
     <h2>Contacto</h2>
     <form>
@@ -52,6 +55,7 @@
     </form>
   </section>
 
+  <!-- Footer -->
   <footer>
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
@@ -74,13 +78,13 @@
     </div>
   </div>
 
+  <!-- JS para control de la ventana -->
   <script>
     const ventana = document.getElementById('ventana-legal');
     const aceptar = document.getElementById('aceptar');
     const rechazar = document.getElementById('rechazar');
     const configurar = document.getElementById('configurar');
 
-    // Mostrar ventana si no se ha dado consentimiento aún
     if (!localStorage.getItem('consentimiento')) {
       ventana.classList.add('mostrar');
     }
@@ -93,10 +97,9 @@
     aceptar.addEventListener('click', () => cerrarVentana('aceptado'));
     rechazar.addEventListener('click', () => cerrarVentana('rechazado'));
     configurar.addEventListener('click', () => {
-      alert('Aquí podrías mostrar opciones más avanzadas.');
+      alert('Aquí puedes mostrar configuraciones personalizadas.');
     });
   </script>
 
 </body>
 </html>
-
