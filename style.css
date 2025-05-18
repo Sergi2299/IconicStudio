@@ -42,7 +42,7 @@ header {
   font-style: italic;
 }
 
-/* Responsive logo y textos */
+/* Responsive logo y textos header */
 @media (max-width: 600px) {
   .logo-img {
     width: 60px;
@@ -141,6 +141,13 @@ form textarea:focus {
   outline: none;
 }
 
+.captcha-label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #111;
+}
+
+/* Botón */
 button {
   background-color: #00bfff;
   color: white;
@@ -165,27 +172,32 @@ footer {
   font-size: 0.9rem;
 }
 
-/* VENTANA LEGAL FLOTANTE */
+/* -------------------------------------- */
+/* VENTANA MODAL LEGAL - CENTRADA Y FIJA */
+/* -------------------------------------- */
+
 .ventana-legal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, #00bfff, #0099cc);
-  color: white;
+  background: white;
+  color: #111;
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  z-index: 10000;
   width: 90%;
-  max-width: 450px;
-  z-index: 9999;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  font-family: 'Orbitron', sans-serif;
-  text-align: center;
+  max-width: 500px;
   display: none;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .ventana-legal.mostrar {
-  display: block;
+  display: flex;
 }
 
 .ventana-contenido h3 {
@@ -195,7 +207,8 @@ footer {
 
 .ventana-contenido p {
   font-size: 1rem;
-  margin: 15px 0;
+  margin: 0;
+  line-height: 1.5;
 }
 
 .botones-legales {
@@ -203,38 +216,50 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin: 15px 0;
 }
 
 .botones-legales button {
-  background-color: white;
-  color: #00bfff;
+  background-color: #004466;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
   font-weight: bold;
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
   cursor: pointer;
-  font-size: 0.95rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
+  min-width: 100px;
 }
 
 .botones-legales button:hover {
-  background-color: #e0f7ff;
-  color: #0077aa;
+  background-color: #006699;
 }
 
 .enlaces-legales {
-  font-size: 0.85rem;
-  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .enlaces-legales a {
-  color: white;
-  text-decoration: underline;
+  color: #00bfff;
+  text-decoration: none;
+  margin: 0 5px;
 }
 
 .enlaces-legales a:hover {
-  color: #d0f0ff;
+  text-decoration: underline;
 }
 
+/* Responsive ventana legal */
+@media (max-width: 500px) {
+  .ventana-legal {
+    padding: 20px;
+  }
 
+  .botones-legales {
+    flex-direction: column;
+  }
+
+  .botones-legales button {
+    width: 100%;
+  }
+}
