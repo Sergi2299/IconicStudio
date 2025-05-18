@@ -88,91 +88,7 @@ h2 {
   color: #111;
 }
 
-/* Servicios */
-.servicio {
-  background-color: white;
-  border-left: 5px solid #00bfff;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Galería */
-.imagenes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.imagenes img {
-  width: 250px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-}
-
-.imagenes img:hover {
-  transform: scale(1.05);
-}
-
-/* Formulario de contacto */
-form {
-  max-width: 600px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-form input,
-form textarea {
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: 'Orbitron', sans-serif;
-}
-
-form input:focus,
-form textarea:focus {
-  border-color: #00bfff;
-  outline: none;
-}
-
-.captcha-label {
-  font-weight: bold;
-  font-size: 1rem;
-  color: #111;
-}
-
-/* Botón */
-button {
-  background-color: #00bfff;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0099cc;
-}
-
-/* Footer */
-footer {
-  background-color: #111;
-  color: white;
-  text-align: center;
-  padding: 15px;
-  font-size: 0.9rem;
-}
-
-/* Aviso de cookies destacado y centrado */
+/* Banner cookies */
 .cookie-consent {
   position: fixed;
   bottom: 30px;
@@ -219,38 +135,43 @@ footer {
   color: #b0e0ff;
 }
 
-.cookie-consent
-
-
-
-
-
-ChatGPT Plus
-button {
-background-color: #004466;
-border-radius: 20px;
-padding: 10px 20px;
-font-weight: bold;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-transition: background-color 0.3s ease;
+.cookie-consent button {
+  background-color: #004466;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .cookie-consent button:hover {
-background-color: #006699;
+  background-color: #006699;
 }
 
 @media (max-width: 500px) {
-.cookie-consent {
-flex-direction: column;
-gap: 15px;
-text-align: center;
+  .cookie-consent {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .cookie-consent p {
+    flex: unset;
+  }
+
+  .cookie-consent button {
+    width: 100%;
+  }
 }
 
-.cookie-consent p {
-flex: unset;
-}
-
-.cookie-consent button {
-width: 100%;
-}
+/* Footer */
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
 }
