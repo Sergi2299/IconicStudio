@@ -1,28 +1,64 @@
+/* Fuente principal */
 body {
-  font-family: 'Orbitron', sans-serif;
   margin: 0;
-  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
+/* Encabezado */
 header {
   background-color: #111;
   color: white;
-  padding: 20px;
+  padding: 20px 0;
+  text-align: center;
 }
 
 .header-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .logo-img {
-  height: 60px;
-  margin-right: 20px;
+  width: 80px;
+  height: auto;
+  transition: transform 0.3s ease;
 }
 
+.logo-img:hover {
+  transform: scale(1.1);
+}
+
+.header-texto h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.header-texto p {
+  margin: 5px 0 0 0;
+  font-style: italic;
+}
+
+/* Responsive logo y textos header */
+@media (max-width: 600px) {
+  .logo-img {
+    width: 60px;
+  }
+  .header-texto h1 {
+    font-size: 1.5rem;
+  }
+  .header-texto p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Navegación */
 nav {
-  background-color: #333;
-  padding: 10px;
+  background-color: #222;
+  padding: 10px 0;
   text-align: center;
 }
 
@@ -31,141 +67,190 @@ nav a {
   margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
+nav a:hover {
+  color: #00bfff;
+}
+
+/* Secciones generales */
 section {
   padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
 }
 
-.servicio {
+h2 {
+  text-align: center;
   margin-bottom: 30px;
-}
-
-.imagenes img {
-  width: 150px;
-  margin-right: 15px;
-  margin-top: 10px;
-}
-
-form input,
-form textarea {
-  display: block;
-  margin-bottom: 15px;
-  width: 100%;
-  max-width: 500px;
-  padding: 10px;
-  font-size: 1rem;
-}
-
-form button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #00bfff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-form button:hover {
-  background-color: #0099cc;
-}
-
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-}
-
-/* Modal de consentimiento */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  padding: 20px;
-}
-
-.modal-consent {
-  background: white;
-  max-width: 600px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  text-align: center;
-}
-
-.modal-consent h2 {
-  margin-top: 0;
   font-size: 1.8rem;
   color: #111;
 }
 
-.modal-consent p {
-  font-size: 1rem;
-  color: #333;
-  margin: 20px 0;
-  line-height: 1.6;
+/* Servicios */
+.servicio {
+  background-color: white;
+  border-left: 5px solid #00bfff;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.modal-consent a {
-  color: #00bfff;
-  text-decoration: underline;
-}
-
-.modal-buttons {
+/* Galería */
+.imagenes {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   justify-content: center;
-  margin-top: 20px;
+  gap: 20px;
 }
 
-.modal-buttons button {
-  background-color: #00bfff;
-  border: none;
-  color: white;
-  padding: 12px 20px;
+.imagenes img {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.imagenes img:hover {
+  transform: scale(1.05);
+}
+
+/* Formulario de contacto */
+form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input,
+form textarea {
+  padding: 12px;
   font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Orbitron', sans-serif;
 }
 
-.modal-buttons button:hover {
+form input:focus,
+form textarea:focus {
+  border-color: #00bfff;
+  outline: none;
+}
+
+.captcha-label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #111;
+}
+
+/* Botón */
+button {
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
   background-color: #0099cc;
 }
 
-#btn-reject-all {
-  background-color: #999;
+/* Footer */
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
 }
 
-#btn-reject-all:hover {
-  background-color: #777;
+/* Aviso de cookies destacado y centrado */
+.cookie-consent {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00bfff, #0099cc);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 30px;
+  box-shadow: 0 12px 30px rgba(0, 191, 255, 0.6);
+  font-size: 1.1rem;
+  max-width: 450px;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  font-family: 'Orbitron', sans-serif;
+  flex-wrap: nowrap;
 }
 
-#btn-configure {
-  background-color: #004466;
+.cookie-consent.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(150%);
+  pointer-events: none;
 }
 
-#btn-configure:hover {
-  background-color: #006699;
+.cookie-consent p {
+  margin: 0;
+  flex: 1 1 auto;
+  line-height: 1.3;
+}
+
+.cookie-consent a {
+  color: #e0f7ff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.cookie-consent a:hover {
+  color: #b0e0ff;
+}
+
+.cookie-consent
+
+
+
+
+
+ChatGPT Plus
+button {
+background-color: #004466;
+border-radius: 20px;
+padding: 10px 20px;
+font-weight: bold;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+transition: background-color 0.3s ease;
+}
+
+.cookie-consent button:hover {
+background-color: #006699;
 }
 
 @media (max-width: 500px) {
-  .modal-buttons {
-    flex-direction: column;
-  }
-  .modal-buttons button {
-    width: 100%;
-  }
+.cookie-consent {
+flex-direction: column;
+gap: 15px;
+text-align: center;
+}
+
+.cookie-consent p {
+flex: unset;
+}
+
+.cookie-consent button {
+width: 100%;
+}
 }
