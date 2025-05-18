@@ -6,9 +6,10 @@
   <title>Iconic Studio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
+
+  <!-- Contenido de tu web -->
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
@@ -25,54 +26,17 @@
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <section id="servicios">
-    <h2>¿Qué ofrecemos?</h2>
-    <div class="servicio">
-      <h3>Diseño de logos</h3>
-      <p>Diseñamos tu logo profesional desde cero, con estilo moderno y adaptado a tu marca.</p>
-    </div>
-    <div class="servicio">
-      <h3>Creación de páginas web</h3>
-      <p>Desarrollamos páginas responsive y atractivas para empresas, autónomos o emprendedores.</p>
-    </div>
-  </section>
-
-  <section id="galeria">
-    <h2>Proyectos recientes</h2>
-    <div class="imagenes">
-      <img src="logo1.jpg" alt="Logo 1" />
-      <img src="logo2.jpg" alt="Logo 2" />
-      <img src="logo3.png" alt="Logo 3" />
-    </div>
-  </section>
-
-  <section id="contacto">
-    <h2>Contáctanos</h2>
-    <form id="formulario-contacto">
-      <input type="text" name="nombre" placeholder="Tu nombre" required />
-      <input type="email" name="email" placeholder="Tu email" required />
-      <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
-
-      <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
-      <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 8976" required pattern="\d{4}" maxlength="4" />
-
-      <button type="submit">Enviar mensaje</button>
-    </form>
-
-    <div id="mensaje-enviado" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
-      ¡Gracias por confiar en nosotros! En breves te contactaremos.
-    </div>
-  </section>
+  <!-- ... resto de tu contenido ... -->
 
   <footer>
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
-  <!-- MODAL LEGAL -->
+  <!-- MODAL LEGAL BLOQUEANTE -->
   <div class="modal-legal" id="modal-legal">
     <div class="modal-legal-content">
       <h2>Tu privacidad es importante</h2>
-      <p>Usamos cookies propias y de terceros para analizar el uso de nuestra web y mejorar tu experiencia. Puedes aceptar, rechazar o personalizar tus preferencias.</p>
+      <p>Utilizamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar tus preferencias.</p>
 
       <div class="botones-modal-legal">
         <button id="btn-aceptar-todo">Aceptar todo</button>
@@ -82,80 +46,43 @@
 
       <div class="legal-links">
         <a href="/politica-de-privacidad.html" target="_blank">Política de Privacidad</a> |
-        <a href="/cookies.html" target="_blank">Política de Cookies</a> |
+        <a href="/cookies.html" target="_blank">Cookies</a> |
         <a href="/terminos.html" target="_blank">Términos y Condiciones</a>
       </div>
     </div>
   </div>
 
   <script>
-    // CAPTCHA
-    const captchaCodeEl = document.getElementById("captcha-code");
-    let currentCaptcha = '';
-
-    function generarCaptcha() {
-      currentCaptcha = '';
-      for (let i = 0; i < 4; i++) {
-        currentCaptcha += Math.floor(Math.random() * 10);
-      }
-      captchaCodeEl.textContent = currentCaptcha;
-    }
-
-    generarCaptcha();
-
-    document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const captchaInput = document.getElementById("captcha-input").value.trim();
-
-      if (captchaInput !== currentCaptcha) {
-        alert("Captcha incorrecto. Por favor, introduce el número correcto.");
-        generarCaptcha();
-        return;
-      }
-
-      const formData = new FormData(this);
-
-      fetch("https://formsubmit.co/ajax/sergifenollar88@gmail.com", {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          this.reset();
-          generarCaptcha();
-          document.getElementById("mensaje-enviado").style.display = "block";
-          setTimeout(() => {
-            document.getElementById("mensaje-enviado").style.display = "none";
-          }, 5000);
-        } else {
-          alert("Ocurrió un error al enviar el mensaje.");
-        }
-      }).catch(() => {
-        alert("Error al enviar el formulario. Intenta de nuevo.");
-      });
-    });
-
-    // MODAL LEGAL
     const modal = document.getElementById('modal-legal');
     const btnAceptar = document.getElementById('btn-aceptar-todo');
     const btnRechazar = document.getElementById('btn-rechazar-todo');
     const btnConfigurar = document.getElementById('btn-configurar');
 
+    // Desactiva scroll mientras esté el modal visible
+    function bloquearScroll() {
+      document.body.style.overflow = 'hidden';
+    }
+
+    function permitirScroll() {
+      document.body.style.overflow = 'auto';
+    }
+
+    // Mostrar modal si no hay consentimiento guardado
     if (!localStorage.getItem('legalConsent')) {
-      modal.style.display = 'flex';
+      modal.classList.add('show');
+      bloquearScroll();
     }
 
     function cerrarModal(opcion) {
       localStorage.setItem('legalConsent', opcion);
-      modal.style.display = 'none';
+      modal.classList.remove('show');
+      permitirScroll();
     }
 
     btnAceptar.addEventListener('click', () => cerrarModal('aceptado'));
     btnRechazar.addEventListener('click', () => cerrarModal('rechazado'));
     btnConfigurar.addEventListener('click', () => {
-      alert("Aquí podrías abrir un panel de configuración avanzada.");
+      alert("Aquí podrías añadir más opciones de personalización.");
     });
   </script>
 </body>
