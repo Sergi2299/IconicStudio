@@ -23,7 +23,6 @@ header {
 
 .logo-img {
   width: 80px;
-  height: auto;
   transition: transform 0.3s ease;
 }
 
@@ -53,7 +52,6 @@ header {
   }
 }
 
-/* Navegación */
 nav {
   background-color: #222;
   padding: 10px 0;
@@ -72,7 +70,6 @@ nav a:hover {
   color: #00bfff;
 }
 
-/* Secciones */
 section {
   padding: 40px 20px;
   max-width: 1000px;
@@ -86,7 +83,6 @@ h2 {
   color: #111;
 }
 
-/* Servicios */
 .servicio {
   background-color: white;
   border-left: 5px solid #00bfff;
@@ -95,7 +91,6 @@ h2 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Galería */
 .imagenes {
   display: flex;
   flex-wrap: wrap;
@@ -105,7 +100,6 @@ h2 {
 
 .imagenes img {
   width: 250px;
-  height: auto;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   transition: transform 0.3s ease;
@@ -115,7 +109,6 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Formulario */
 form {
   max-width: 600px;
   margin: auto;
@@ -145,7 +138,6 @@ form textarea:focus {
   color: #111;
 }
 
-/* Botón */
 button {
   background-color: #00bfff;
   color: white;
@@ -161,7 +153,6 @@ button:hover {
   background-color: #0099cc;
 }
 
-/* Footer */
 footer {
   background-color: #111;
   color: white;
@@ -170,65 +161,69 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Modal de cookies */
-.cookie-consent-modal {
+/* Modal cookies centrado */
+.cookie-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.7);
-  display: flex;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 10000;
 }
 
-.cookie-modal-content {
-  background-color: white;
-  color: #111;
+.cookie-box {
+  background: white;
   padding: 30px;
-  border-radius: 15px;
   max-width: 500px;
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
   font-family: 'Orbitron', sans-serif;
 }
 
-.cookie-modal-content p {
-  margin-bottom: 20px;
+.cookie-box p {
   font-size: 1.1rem;
+  color: #111;
+  margin-bottom: 20px;
 }
 
-.cookie-modal-content a {
+.cookie-box a {
   color: #00bfff;
   text-decoration: underline;
 }
 
-.cookie-modal-content .cookie-buttons {
+.cookie-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.cookie-modal-content button {
+.cookie-buttons button {
   background-color: #004466;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-.cookie-modal-content button:hover {
+.cookie-buttons button:hover {
   background-color: #006699;
 }
 
-@media (max-width: 500px) {
-  .cookie-modal-content {
-    width: 90%;
+@media (min-width: 500px) {
+  .cookie-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .cookie-buttons button {
+    flex: 1;
   }
 }
+
 
 
