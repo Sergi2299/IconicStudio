@@ -26,64 +26,52 @@
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <!-- ... resto de tu contenido ... -->
+  <!-- Aquí va tu contenido habitual -->
 
   <footer>
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
-  <!-- MODAL LEGAL BLOQUEANTE -->
-  <div class="modal-legal" id="modal-legal">
-    <div class="modal-legal-content">
-      <h2>Tu privacidad es importante</h2>
-      <p>Utilizamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar tus preferencias.</p>
-
-      <div class="botones-modal-legal">
-        <button id="btn-aceptar-todo">Aceptar todo</button>
-        <button id="btn-configurar">Configurar</button>
-        <button id="btn-rechazar-todo">Rechazar todo</button>
+  <!-- VENTANA FLOTANTE DE AVISO LEGAL -->
+  <div class="ventana-legal" id="ventana-legal">
+    <div class="ventana-contenido">
+      <h3>Aviso de privacidad</h3>
+      <p>Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar tus preferencias.</p>
+      <div class="botones-legales">
+        <button id="aceptar">Aceptar</button>
+        <button id="configurar">Configurar</button>
+        <button id="rechazar">Rechazar</button>
       </div>
-
-      <div class="legal-links">
-        <a href="/politica-de-privacidad.html" target="_blank">Política de Privacidad</a> |
+      <div class="enlaces-legales">
+        <a href="/politica-de-privacidad.html" target="_blank">Privacidad</a> |
         <a href="/cookies.html" target="_blank">Cookies</a> |
-        <a href="/terminos.html" target="_blank">Términos y Condiciones</a>
+        <a href="/terminos.html" target="_blank">Términos</a>
       </div>
     </div>
   </div>
 
   <script>
-    const modal = document.getElementById('modal-legal');
-    const btnAceptar = document.getElementById('btn-aceptar-todo');
-    const btnRechazar = document.getElementById('btn-rechazar-todo');
-    const btnConfigurar = document.getElementById('btn-configurar');
+    const ventana = document.getElementById('ventana-legal');
+    const aceptar = document.getElementById('aceptar');
+    const rechazar = document.getElementById('rechazar');
+    const configurar = document.getElementById('configurar');
 
-    // Desactiva scroll mientras esté el modal visible
-    function bloquearScroll() {
-      document.body.style.overflow = 'hidden';
+    // Mostrar si no hay consentimiento guardado
+    if (!localStorage.getItem('consentimiento')) {
+      ventana.classList.add('mostrar');
     }
 
-    function permitirScroll() {
-      document.body.style.overflow = 'auto';
+    function cerrarVentana(opcion) {
+      localStorage.setItem('consentimiento', opcion);
+      ventana.classList.remove('mostrar');
     }
 
-    // Mostrar modal si no hay consentimiento guardado
-    if (!localStorage.getItem('legalConsent')) {
-      modal.classList.add('show');
-      bloquearScroll();
-    }
-
-    function cerrarModal(opcion) {
-      localStorage.setItem('legalConsent', opcion);
-      modal.classList.remove('show');
-      permitirScroll();
-    }
-
-    btnAceptar.addEventListener('click', () => cerrarModal('aceptado'));
-    btnRechazar.addEventListener('click', () => cerrarModal('rechazado'));
-    btnConfigurar.addEventListener('click', () => {
-      alert("Aquí podrías añadir más opciones de personalización.");
+    aceptar.addEventListener('click', () => cerrarVentana('aceptado'));
+    rechazar.addEventListener('click', () => cerrarVentana('rechazado'));
+    configurar.addEventListener('click', () => {
+      alert("Aquí podrías mostrar opciones avanzadas.");
     });
   </script>
 </body>
 </html>
+
