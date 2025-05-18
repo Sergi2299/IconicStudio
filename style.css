@@ -6,76 +6,6 @@ body {
   color: #333;
 }
 
-/* Modal privacidad */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  padding: 20px;
-}
-
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.modal-content h2 {
-  margin-top: 0;
-}
-
-.modal-content a {
-  color: #00bfff;
-  text-decoration: underline;
-}
-
-.modal-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.modal-buttons button {
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
-}
-
-#aceptar {
-  background-color: #00bfff;
-  color: white;
-}
-
-#rechazar {
-  background-color: #ff4d4d;
-  color: white;
-}
-
-#configurar {
-  background-color: #f0ad4e;
-  color: white;
-}
-
-.modal-buttons button:hover {
-  opacity: 0.9;
-}
-
 /* Encabezado */
 header {
   background-color: #111;
@@ -112,6 +42,7 @@ header {
   font-style: italic;
 }
 
+/* Responsive logo y textos header */
 @media (max-width: 600px) {
   .logo-img {
     width: 60px;
@@ -143,7 +74,7 @@ nav a:hover {
   color: #00bfff;
 }
 
-/* Secciones */
+/* Secciones generales */
 section {
   padding: 40px 20px;
   max-width: 1000px;
@@ -186,7 +117,7 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Formulario */
+/* Formulario de contacto */
 form {
   max-width: 600px;
   margin: auto;
@@ -239,4 +170,87 @@ footer {
   text-align: center;
   padding: 15px;
   font-size: 0.9rem;
+}
+
+/* Aviso de cookies destacado y centrado */
+.cookie-consent {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00bfff, #0099cc);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 30px;
+  box-shadow: 0 12px 30px rgba(0, 191, 255, 0.6);
+  font-size: 1.1rem;
+  max-width: 450px;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  font-family: 'Orbitron', sans-serif;
+  flex-wrap: nowrap;
+}
+
+.cookie-consent.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(150%);
+  pointer-events: none;
+}
+
+.cookie-consent p {
+  margin: 0;
+  flex: 1 1 auto;
+  line-height: 1.3;
+}
+
+.cookie-consent a {
+  color: #e0f7ff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.cookie-consent a:hover {
+  color: #b0e0ff;
+}
+
+.cookie-consent
+
+
+
+
+
+ChatGPT Plus
+button {
+background-color: #004466;
+border-radius: 20px;
+padding: 10px 20px;
+font-weight: bold;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+transition: background-color 0.3s ease;
+}
+
+.cookie-consent button:hover {
+background-color: #006699;
+}
+
+@media (max-width: 500px) {
+.cookie-consent {
+flex-direction: column;
+gap: 15px;
+text-align: center;
+}
+
+.cookie-consent p {
+flex: unset;
+}
+
+.cookie-consent button {
+width: 100%;
+}
 }
