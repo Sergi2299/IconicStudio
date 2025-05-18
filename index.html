@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <!-- Contenido de tu web -->
+  <!-- Encabezado -->
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
@@ -20,23 +20,47 @@
     </div>
   </header>
 
+  <!-- Navegación -->
   <nav>
     <a href="#servicios">Servicios</a>
     <a href="#galeria">Galería</a>
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <!-- Aquí va tu contenido habitual -->
+  <!-- Secciones -->
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <div class="servicio">Diseño de logos profesionales.</div>
+    <div class="servicio">Identidad visual y branding.</div>
+  </section>
+
+  <section id="galeria">
+    <h2>Galería</h2>
+    <div class="imagenes">
+      <img src="logo1.jpg" alt="Logo 1" />
+      <img src="logo2.jpg" alt="Logo 2" />
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <form>
+      <input type="text" placeholder="Tu nombre" required />
+      <input type="email" placeholder="Tu email" required />
+      <textarea rows="4" placeholder="Mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
 
   <footer>
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
-  <!-- VENTANA FLOTANTE DE AVISO LEGAL -->
+  <!-- VENTANA LEGAL FLOTANTE -->
   <div class="ventana-legal" id="ventana-legal">
     <div class="ventana-contenido">
-      <h3>Aviso de privacidad</h3>
-      <p>Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar tus preferencias.</p>
+      <h3>Aviso legal y de cookies</h3>
+      <p>Este sitio web utiliza cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar tus preferencias.</p>
       <div class="botones-legales">
         <button id="aceptar">Aceptar</button>
         <button id="configurar">Configurar</button>
@@ -56,7 +80,7 @@
     const rechazar = document.getElementById('rechazar');
     const configurar = document.getElementById('configurar');
 
-    // Mostrar si no hay consentimiento guardado
+    // Mostrar ventana si no se ha dado consentimiento aún
     if (!localStorage.getItem('consentimiento')) {
       ventana.classList.add('mostrar');
     }
@@ -69,9 +93,9 @@
     aceptar.addEventListener('click', () => cerrarVentana('aceptado'));
     rechazar.addEventListener('click', () => cerrarVentana('rechazado'));
     configurar.addEventListener('click', () => {
-      alert("Aquí podrías mostrar opciones avanzadas.");
+      alert('Aquí podrías mostrar opciones más avanzadas.');
     });
   </script>
+
 </body>
 </html>
-
