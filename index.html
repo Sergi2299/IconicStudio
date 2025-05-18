@@ -9,15 +9,6 @@
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal-content">
-      <h2>¡Bienvenido a Iconic Studio!</h2>
-      <p>Explora nuestros servicios y descubre cómo podemos ayudarte a crear tu imagen ideal.</p>
-      <button id="cerrar-modal">Cerrar</button>
-    </div>
-  </div>
-
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
@@ -77,24 +68,34 @@
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
-  <!-- Aviso cookies -->
-  <div class="cookie-consent" id="cookie-consent" role="alert" aria-live="polite" aria-atomic="true">
-    <p>
-      Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestra
-      <a href="#" target="_blank" rel="noopener noreferrer">Política de privacidad</a> y
-      <a href="#" target="_blank" rel="noopener noreferrer">Aviso legal</a>.
-    </p>
-    <button id="btn-accept-cookies" aria-label="Aceptar cookies">Aceptar</button>
+  <!-- MODAL LEGAL -->
+  <div class="modal-legal" id="modal-legal">
+    <div class="modal-legal-content">
+      <h2>Tu privacidad es importante</h2>
+      <p>Usamos cookies propias y de terceros para analizar el uso de nuestra web y mejorar tu experiencia. Puedes aceptar, rechazar o personalizar tus preferencias.</p>
+
+      <div class="botones-modal-legal">
+        <button id="btn-aceptar-todo">Aceptar todo</button>
+        <button id="btn-configurar">Configurar</button>
+        <button id="btn-rechazar-todo">Rechazar todo</button>
+      </div>
+
+      <div class="legal-links">
+        <a href="/politica-de-privacidad.html" target="_blank">Política de Privacidad</a> |
+        <a href="/cookies.html" target="_blank">Política de Cookies</a> |
+        <a href="/terminos.html" target="_blank">Términos y Condiciones</a>
+      </div>
+    </div>
   </div>
 
   <script>
-    // CAPTCHA aleatorio
+    // CAPTCHA
     const captchaCodeEl = document.getElementById("captcha-code");
     let currentCaptcha = '';
 
     function generarCaptcha() {
       currentCaptcha = '';
-      for(let i=0; i<4; i++) {
+      for (let i = 0; i < 4; i++) {
         currentCaptcha += Math.floor(Math.random() * 10);
       }
       captchaCodeEl.textContent = currentCaptcha;
@@ -106,7 +107,7 @@
       e.preventDefault();
       const captchaInput = document.getElementById("captcha-input").value.trim();
 
-      if(captchaInput !== currentCaptcha) {
+      if (captchaInput !== currentCaptcha) {
         alert("Captcha incorrecto. Por favor, introduce el número correcto.");
         generarCaptcha();
         return;
@@ -136,40 +137,26 @@
       });
     });
 
-    // Cookies
-    const cookieConsent = document.getElementById('cookie-consent');
-    const btnAcceptCookies = document.getElementById('btn-accept-cookies');
+    // MODAL LEGAL
+    const modal = document.getElementById('modal-legal');
+    const btnAceptar = document.getElementById('btn-aceptar-todo');
+    const btnRechazar = document.getElementById('btn-rechazar-todo');
+    const btnConfigurar = document.getElementById('btn-configurar');
 
-    function checkCookieConsent() {
-      return localStorage.getItem('cookieConsent') === 'true';
+    if (!localStorage.getItem('legalConsent')) {
+      modal.style.display = 'flex';
     }
 
-    function setCookieConsent() {
-      localStorage.setItem('cookieConsent', 'true');
-      cookieConsent.classList.add('hide');
+    function cerrarModal(opcion) {
+      localStorage.setItem('legalConsent', opcion);
+      modal.style.display = 'none';
     }
 
-    if(checkCookieConsent()) {
-      cookieConsent.style.display = 'none';
-    }
-
-    btnAcceptCookies.addEventListener('click', () => {
-      setCookieConsent();
-    });
-
-    // MODAL lógica
-    const modal = document.getElementById('modal');
-    const cerrarModal = document.getElementById('cerrar-modal');
-
-    window.addEventListener('load', () => {
-      modal.classList.add('mostrar');
-    });
-
-    cerrarModal.addEventListener('click', () => {
-      modal.classList.remove('mostrar');
+    btnAceptar.addEventListener('click', () => cerrarModal('aceptado'));
+    btnRechazar.addEventListener('click', () => cerrarModal('rechazado'));
+    btnConfigurar.addEventListener('click', () => {
+      alert("Aquí podrías abrir un panel de configuración avanzada.");
     });
   </script>
 </body>
 </html>
-
-
