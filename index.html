@@ -9,6 +9,15 @@
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <h2>¡Bienvenido a Iconic Studio!</h2>
+      <p>Explora nuestros servicios y descubre cómo podemos ayudarte a crear tu imagen ideal.</p>
+      <button id="cerrar-modal">Cerrar</button>
+    </div>
+  </div>
+
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
@@ -52,7 +61,7 @@
       <input type="text" name="nombre" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
-      
+
       <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
       <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 8976" required pattern="\d{4}" maxlength="4" />
 
@@ -79,7 +88,7 @@
   </div>
 
   <script>
-    // CAPTCHA aleatorio de 4 dígitos
+    // CAPTCHA aleatorio
     const captchaCodeEl = document.getElementById("captcha-code");
     let currentCaptcha = '';
 
@@ -93,15 +102,13 @@
 
     generarCaptcha();
 
-    // Validar formulario con captcha
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
-
       const captchaInput = document.getElementById("captcha-input").value.trim();
 
       if(captchaInput !== currentCaptcha) {
         alert("Captcha incorrecto. Por favor, introduce el número correcto.");
-        generarCaptcha(); // Regenerar captcha si falla
+        generarCaptcha();
         return;
       }
 
@@ -129,7 +136,7 @@
       });
     });
 
-    // Aviso cookies
+    // Cookies
     const cookieConsent = document.getElementById('cookie-consent');
     const btnAcceptCookies = document.getElementById('btn-accept-cookies');
 
@@ -149,7 +156,20 @@
     btnAcceptCookies.addEventListener('click', () => {
       setCookieConsent();
     });
+
+    // MODAL lógica
+    const modal = document.getElementById('modal');
+    const cerrarModal = document.getElementById('cerrar-modal');
+
+    window.addEventListener('load', () => {
+      modal.classList.add('mostrar');
+    });
+
+    cerrarModal.addEventListener('click', () => {
+      modal.classList.remove('mostrar');
+    });
   </script>
 </body>
 </html>
+
 
