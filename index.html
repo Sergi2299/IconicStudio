@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Iconic Studio</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
@@ -54,7 +53,7 @@
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
 
       <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
-      <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 8976" required pattern="\d{4}" maxlength="4" />
+      <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 1234" required pattern="\d{4}" maxlength="4" />
 
       <button type="submit">Enviar mensaje</button>
     </form>
@@ -69,12 +68,12 @@
   </footer>
 
   <!-- Modal cookies -->
-  <div class="cookie-modal" id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+  <div class="cookie-overlay" id="cookie-overlay">
     <div class="cookie-modal-content">
-      <h2 id="cookie-title">Preferencias de privacidad</h2>
+      <h2>Preferencias de privacidad</h2>
       <p>
-        Utilizamos cookies para mejorar tu experiencia y ofrecer contenido personalizado.
-        Lee nuestra <a href="privacidad.html" target="_blank">Política de Privacidad</a> y 
+        Utilizamos cookies para mejorar tu experiencia. Consulta nuestra 
+        <a href="privacidad.html" target="_blank">Política de Privacidad</a> y 
         <a href="aviso-legal.html" target="_blank">Términos Legales</a>.
       </p>
       <div class="cookie-buttons">
@@ -86,37 +85,37 @@
   </div>
 
   <script>
-    // Evitar scroll hasta que acepten/rechacen cookies
-    if (!localStorage.getItem('cookieDecision')) {
-      document.body.style.overflow = 'hidden';
-    }
+    const overlay = document.getElementById("cookie-overlay");
+    const acceptBtn = document.getElementById("accept-cookies");
+    const rejectBtn = document.getElementById("reject-cookies");
+    const configBtn = document.getElementById("config-cookies");
 
-    const cookieModal = document.getElementById('cookie-modal');
-    const acceptBtn = document.getElementById('accept-cookies');
-    const rejectBtn = document.getElementById('reject-cookies');
-    const configBtn = document.getElementById('config-cookies');
-
-    const closeModal = () => {
-      cookieModal.classList.add('hide');
-      document.body.style.overflow = '';
-    }
+    const closeOverlay = () => {
+      overlay.style.display = "none";
+    };
 
     const setCookieDecision = (decision) => {
-      localStorage.setItem('cookieDecision', decision);
-      closeModal();
+      localStorage.setItem("cookieDecision", decision);
+      closeOverlay();
+    };
+
+    if (!localStorage.getItem("cookieDecision")) {
+      overlay.style.display = "flex";
+    } else {
+      overlay.style.display = "none";
     }
 
-    acceptBtn.addEventListener('click', () => setCookieDecision('accepted'));
-    rejectBtn.addEventListener('click', () => setCookieDecision('rejected'));
-    configBtn.addEventListener('click', () => alert("Aquí podrías abrir un configurador de cookies."));
+    acceptBtn.addEventListener("click", () => setCookieDecision("accepted"));
+    rejectBtn.addEventListener("click", () => setCookieDecision("rejected"));
+    configBtn.addEventListener("click", () => alert("Aquí iría el panel de configuración."));
 
-    // CAPTCHA
+    // Captcha
     const captchaCodeEl = document.getElementById("captcha-code");
     let currentCaptcha = '';
 
     function generarCaptcha() {
       currentCaptcha = '';
-      for(let i = 0; i < 4; i++) {
+      for (let i = 0; i < 4; i++) {
         currentCaptcha += Math.floor(Math.random() * 10);
       }
       captchaCodeEl.textContent = currentCaptcha;
@@ -128,8 +127,8 @@
       e.preventDefault();
       const captchaInput = document.getElementById("captcha-input").value.trim();
 
-      if(captchaInput !== currentCaptcha) {
-        alert("Captcha incorrecto. Por favor, introduce el número correcto.");
+      if (captchaInput !== currentCaptcha) {
+        alert("Captcha incorrecto.");
         generarCaptcha();
         return;
       }
@@ -139,9 +138,7 @@
       fetch("https://formsubmit.co/ajax/sergifenollar88@gmail.com", {
         method: "POST",
         body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       }).then(response => {
         if (response.ok) {
           this.reset();
@@ -151,13 +148,10 @@
             document.getElementById("mensaje-enviado").style.display = "none";
           }, 5000);
         } else {
-          alert("Ocurrió un error al enviar el mensaje.");
+          alert("Error al enviar.");
         }
-      }).catch(() => {
-        alert("Error al enviar el formulario. Intenta de nuevo.");
-      });
+      }).catch(() => alert("Error al enviar. Intenta de nuevo."));
     });
   </script>
 </body>
 </html>
-
