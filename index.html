@@ -52,7 +52,7 @@
       <input type="text" name="nombre" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
-      
+
       <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
       <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 8976" required pattern="\d{4}" maxlength="4" />
 
@@ -68,25 +68,55 @@
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
-  <!-- Aviso cookies -->
-  <div class="cookie-consent" id="cookie-consent" role="alert" aria-live="polite" aria-atomic="true">
-    <p>
-      Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestra
-      <a href="privacidad.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a> y
-      <a href="aviso-legal.html" target="_blank" rel="noopener noreferrer">Aviso legal</a>.
-      <a href="privacidad.html" target="_blank" rel="noopener noreferrer">Cookies</a>.
-    </p>
-    <button id="btn-accept-cookies" aria-label="Aceptar cookies">Aceptar</button>
+  <!-- Modal cookies -->
+  <div class="cookie-modal" id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+    <div class="cookie-modal-content">
+      <h2 id="cookie-title">Preferencias de privacidad</h2>
+      <p>
+        Utilizamos cookies para mejorar tu experiencia y ofrecer contenido personalizado.
+        Lee nuestra <a href="privacidad.html" target="_blank">Política de Privacidad</a> y 
+        <a href="aviso-legal.html" target="_blank">Términos Legales</a>.
+      </p>
+      <div class="cookie-buttons">
+        <button id="accept-cookies">Aceptar</button>
+        <button id="reject-cookies">Rechazar</button>
+        <button id="config-cookies">Configurar</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    // CAPTCHA aleatorio de 4 dígitos
+    // Evitar scroll hasta que acepten/rechacen cookies
+    if (!localStorage.getItem('cookieDecision')) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    const cookieModal = document.getElementById('cookie-modal');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const rejectBtn = document.getElementById('reject-cookies');
+    const configBtn = document.getElementById('config-cookies');
+
+    const closeModal = () => {
+      cookieModal.classList.add('hide');
+      document.body.style.overflow = '';
+    }
+
+    const setCookieDecision = (decision) => {
+      localStorage.setItem('cookieDecision', decision);
+      closeModal();
+    }
+
+    acceptBtn.addEventListener('click', () => setCookieDecision('accepted'));
+    rejectBtn.addEventListener('click', () => setCookieDecision('rejected'));
+    configBtn.addEventListener('click', () => alert("Aquí podrías abrir un configurador de cookies."));
+
+    // CAPTCHA
     const captchaCodeEl = document.getElementById("captcha-code");
     let currentCaptcha = '';
 
     function generarCaptcha() {
       currentCaptcha = '';
-      for(let i=0; i<4; i++) {
+      for(let i = 0; i < 4; i++) {
         currentCaptcha += Math.floor(Math.random() * 10);
       }
       captchaCodeEl.textContent = currentCaptcha;
@@ -94,15 +124,13 @@
 
     generarCaptcha();
 
-    // Validar formulario con captcha
     document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
       e.preventDefault();
-
       const captchaInput = document.getElementById("captcha-input").value.trim();
 
       if(captchaInput !== currentCaptcha) {
         alert("Captcha incorrecto. Por favor, introduce el número correcto.");
-        generarCaptcha(); // Regenerar captcha si falla
+        generarCaptcha();
         return;
       }
 
@@ -129,27 +157,7 @@
         alert("Error al enviar el formulario. Intenta de nuevo.");
       });
     });
-
-    // Aviso cookies
-    const cookieConsent = document.getElementById('cookie-consent');
-    const btnAcceptCookies = document.getElementById('btn-accept-cookies');
-
-    function checkCookieConsent() {
-      return localStorage.getItem('cookieConsent') === 'true';
-    }
-
-    function setCookieConsent() {
-      localStorage.setItem('cookieConsent', 'true');
-      cookieConsent.classList.add('hide');
-    }
-
-    if(checkCookieConsent()) {
-      cookieConsent.style.display = 'none';
-    }
-
-    btnAcceptCookies.addEventListener('click', () => {
-      setCookieConsent();
-    });
   </script>
 </body>
 </html>
+
