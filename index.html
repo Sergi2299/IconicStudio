@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
+  <!-- MODAL COOKIES -->
   <div id="cookie-modal" class="modal">
     <div class="modal-content">
       <h2>Tu privacidad es importante</h2>
@@ -24,22 +25,25 @@
     </div>
   </div>
 
+  <!-- HEADER -->
   <header>
     <div class="header-container">
       <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
       <div class="header-texto">
         <h1>Iconic Studio</h1>
-        <p>Tu imagina, nosotros creamos</p>
+        <p>Tú imagina, nosotros creamos</p>
       </div>
     </div>
   </header>
 
+  <!-- NAV -->
   <nav>
     <a href="#servicios">Servicios</a>
     <a href="#galeria">Galería</a>
     <a href="#contacto">Contacto</a>
   </nav>
 
+  <!-- SECCIONES -->
   <section id="servicios">
     <h2>¿Qué ofrecemos?</h2>
     <div class="servicio">
@@ -83,14 +87,15 @@
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
+  <!-- JS -->
   <script>
-    // CAPTCHA aleatorio
+    // CAPTCHA
     const captchaCodeEl = document.getElementById("captcha-code");
-    let currentCaptcha = '';
+    let currentCaptcha = "";
 
     function generarCaptcha() {
-      currentCaptcha = '';
-      for(let i=0; i<4; i++) {
+      currentCaptcha = "";
+      for (let i = 0; i < 4; i++) {
         currentCaptcha += Math.floor(Math.random() * 10);
       }
       captchaCodeEl.textContent = currentCaptcha;
@@ -131,7 +136,7 @@
       });
     });
 
-    // Modal cookies
+    // MODAL COOKIES
     const modal = document.getElementById("cookie-modal");
     const acceptBtn = document.getElementById("accept-cookies");
     const rejectBtn = document.getElementById("reject-cookies");
@@ -140,10 +145,12 @@
     function setConsent(value) {
       localStorage.setItem("cookieConsent", value);
       modal.style.display = "none";
+      document.body.classList.remove("no-scroll");
     }
 
     if (!localStorage.getItem("cookieConsent")) {
       modal.style.display = "flex";
+      document.body.classList.add("no-scroll");
     }
 
     acceptBtn.addEventListener("click", () => setConsent("accepted"));
@@ -152,3 +159,4 @@
   </script>
 </body>
 </html>
+
