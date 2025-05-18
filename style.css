@@ -42,7 +42,7 @@ header {
   font-style: italic;
 }
 
-/* Responsive logo y textos header */
+/* Responsive */
 @media (max-width: 600px) {
   .logo-img {
     width: 60px;
@@ -74,7 +74,7 @@ nav a:hover {
   color: #00bfff;
 }
 
-/* Secciones generales */
+/* Secciones */
 section {
   padding: 40px 20px;
   max-width: 1000px;
@@ -117,7 +117,7 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Formulario de contacto */
+/* Formulario */
 form {
   max-width: 600px;
   margin: auto;
@@ -172,7 +172,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Aviso de cookies destacado y centrado */
+/* Cookies */
 .cookie-consent {
   position: fixed;
   bottom: 30px;
@@ -219,38 +219,100 @@ footer {
   color: #b0e0ff;
 }
 
-.cookie-consent
-
-
-
-
-
-ChatGPT Plus
-button {
-background-color: #004466;
-border-radius: 20px;
-padding: 10px 20px;
-font-weight: bold;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-transition: background-color 0.3s ease;
+.cookie-consent button {
+  background-color: #004466;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+  color: white;
 }
 
 .cookie-consent button:hover {
-background-color: #006699;
+  background-color: #006699;
 }
 
 @media (max-width: 500px) {
-.cookie-consent {
-flex-direction: column;
-gap: 15px;
-text-align: center;
+  .cookie-consent {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .cookie-consent p {
+    flex: unset;
+  }
+
+  .cookie-consent button {
+    width: 100%;
+  }
 }
 
-.cookie-consent p {
-flex: unset;
+/* MODAL personalizado */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-.cookie-consent button {
-width: 100%;
+.modal-overlay.mostrar {
+  display: flex;
 }
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: aparecer 0.4s ease;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #111;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  color: #444;
+  margin: 15px 0;
+}
+
+.modal-content button {
+  background-color: #00bfff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #0099cc;
+}
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
