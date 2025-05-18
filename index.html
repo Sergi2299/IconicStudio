@@ -6,31 +6,32 @@
   <title>Iconic Studio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="logo.png" />
 </head>
 <body>
-  <!-- MODAL PRIVACIDAD / COOKIES -->
-  <div id="cookie-modal" class="modal">
+  <!-- Modal de privacidad -->
+  <div class="modal-overlay" id="modal-privacidad">
     <div class="modal-content">
-      <h2>Tu privacidad es importante</h2>
-      <p>
-        Usamos cookies para personalizar contenido y anuncios, ofrecer funciones de redes sociales y analizar nuestro tráfico. Lee nuestra 
-        <a href="#">Política de Privacidad</a>, <a href="#">Política de Cookies</a> y <a href="#">Términos y Condiciones</a>.
+      <h2>Política de Privacidad y Cookies</h2>
+      <p>Usamos cookies para mejorar tu experiencia. Puedes leer nuestra 
+        <a href="#" target="_blank">Política de Privacidad</a>, 
+        <a href="#" target="_blank">Cookies</a> y 
+        <a href="#" target="_blank">Términos y Condiciones</a>.
       </p>
       <div class="modal-buttons">
-        <button id="accept-cookies">Aceptar</button>
-        <button id="reject-cookies">Rechazar</button>
-        <button id="config-cookies">Configurar</button>
+        <button id="aceptar">Aceptar</button>
+        <button id="rechazar">Rechazar</button>
+        <button id="configurar">Configurar preferencias</button>
       </div>
     </div>
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
   <header>
     <div class="header-container">
-      <img src="logo3.png" alt="Iconic Studio Logo" class="logo-img" />
+      <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
       <div class="header-texto">
         <h1>Iconic Studio</h1>
-        <p>Tú imagina, nosotros creamos</p>
+        <p>Tu imagina, nosotros creamos</p>
       </div>
     </div>
   </header>
@@ -68,8 +69,13 @@
       <input type="text" name="nombre" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
+      
+      <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
+      <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 8976" required pattern="\d{4}" maxlength="4" />
+
       <button type="submit">Enviar mensaje</button>
     </form>
+
     <div id="mensaje-enviado" style="display: none; margin-top: 20px; color: green; font-weight: bold;">
       ¡Gracias por confiar en nosotros! En breves te contactaremos.
     </div>
@@ -80,28 +86,85 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const modal = document.getElementById("cookie-modal");
-      const acceptBtn = document.getElementById("accept-cookies");
-      const rejectBtn = document.getElementById("reject-cookies");
-      const configBtn = document.getElementById("config-cookies");
+    // CAPTCHA
+    const captchaCodeEl = document.getElementById("captcha-code");
+    let currentCaptcha = "";
 
-      if (!localStorage.getItem("cookieConsent")) {
-        modal.style.display = "flex";
-        document.body.style.overflow = "hidden";
+    function generarCaptcha() {
+      currentCaptcha = "";
+      for (let i = 0; i < 4; i++) {
+        currentCaptcha += Math.floor(Math.random() * 10);
+      }
+      captchaCodeEl.textContent = currentCaptcha;
+    }
+
+    generarCaptcha();
+
+    document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const captchaInput = document.getElementById("captcha-input").value.trim();
+      if (captchaInput !== currentCaptcha) {
+        alert("Captcha incorrecto.");
+        generarCaptcha();
+        return;
       }
 
-      function closeModal(consent) {
-        localStorage.setItem("cookieConsent", consent);
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-      }
+      const formData = new FormData(this);
 
-      acceptBtn.onclick = () => closeModal("accepted");
-      rejectBtn.onclick = () => closeModal("rejected");
-      configBtn.onclick = () => alert("Opciones avanzadas no disponibles por ahora.");
+      fetch("https://formsubmit.co/ajax/sergifenollar88@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          this.reset();
+          generarCaptcha();
+          document.getElementById("mensaje-enviado").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("mensaje-enviado").style.display = "none";
+          }, 5000);
+        } else {
+          alert("Error al enviar el mensaje.");
+        }
+      }).catch(() => {
+        alert("Error al enviar el formulario.");
+      });
+    });
+
+    // MODAL cookies / privacidad
+    const modal = document.getElementById('modal-privacidad');
+    const btnAceptar = document.getElementById('aceptar');
+    const btnRechazar = document.getElementById('rechazar');
+    const btnConfigurar = document.getElementById('configurar');
+
+    function ocultarModal() {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    if (!localStorage.getItem('privacidadAceptada')) {
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    btnAceptar.addEventListener("click", () => {
+      localStorage.setItem('privacidadAceptada', 'true');
+      ocultarModal();
+    });
+
+    btnRechazar.addEventListener("click", () => {
+      localStorage.setItem('privacidadAceptada', 'rechazada');
+      ocultarModal();
+    });
+
+    btnConfigurar.addEventListener("click", () => {
+      alert("Aquí se podrían configurar preferencias avanzadas (no implementado).");
     });
   </script>
 </body>
 </html>
+
 
