@@ -84,7 +84,99 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // CAPTCHA
+    const captchaCodeEl = document.getElementById("captcha-code");
+    let currentCaptcha = "";
+
+    function generarCaptcha() {
+      currentCaptcha = "";
+      for (let i = 0; i < 4; i++) {
+        currentCaptcha += Math.floor(Math.random() * 10);
+      }
+      captchaCodeEl.textContent = currentCaptcha;
+    }
+
+    generarCaptcha();
+
+    document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const captchaInput = document.getElementById("captcha-input").value.trim();
+
+      if (captchaInput !== currentCaptcha) {
+        alert("Captcha incorrecto.");
+        generarCaptcha();
+        return;
+      }
+
+      const formData = new FormData(this);
+      fetch("https://formsubmit.co/ajax/sergifenollar88@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      }).then(response => {
+        if (response.ok) {
+          this.reset();
+          generarCaptcha();
+          document.getElementById("mensaje-enviado").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("mensaje-enviado").style.display = "none";
+          }, 5000);
+        } else {
+          alert("Error al enviar el mensaje.");
+        }
+      }).catch(() => {
+        alert("Fallo al enviar el formulario.");
+      });
+    });
+
+    // --- COOKIES ---
+
+    const cookieModal = document.getElementById("cookie-consent");
+    const cookieOverlay = document.getElementById("cookie-overlay");
+    const btnAccept = document.getElementById("btn-accept-cookies");
+    const btnDecline = document.getElementById("btn-decline-cookies");
+    const btnSettings = document.getElementById("btn-settings-cookies");
+
+    function setCookieConsent(value) {
+      localStorage.setItem("cookieConsent", value);
+      ocultarModalCookies();
+    }
+
+    function mostrarModalCookies() {
+      cookieModal.style.display = "block";
+      cookieOverlay.style.display = "block";
+    }
+
+    function ocultarModalCookies() {
+      cookieModal.style.display = "none";
+      cookieOverlay.style.display = "none";
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const consent = localStorage.getItem("cookieConsent");
+      if (!consent) {
+        mostrarModalCookies();
+      }
+    });
+
+    btnAccept.addEventListener("click", () => {
+      setCookieConsent("true");
+    });
+
+    btnDecline.addEventListener("click", () => {
+      setCookieConsent("false");
+    });
+
+    btnSettings.addEventListener("click", () => {
+      alert("Opciones avanzadas próximamente.");
+      setCookieConsent("custom");
+    });
+  </script>
 </body>
 </html>
+
+
 
