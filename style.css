@@ -177,7 +177,7 @@ footer {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.85);
   display: none;
   justify-content: center;
   align-items: center;
@@ -186,59 +186,67 @@ footer {
 
 .cookie-box {
   background: white;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 500px;
+  padding: 50px 40px;
+  border-radius: 30px;
+  max-width: 600px;
   width: 90%;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(0, 191, 255, 0.6);
-  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 15px 40px rgba(0, 191, 255, 0.7);
 }
 
 .cookie-box p {
-  margin-bottom: 20px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  margin-bottom: 40px;
   color: #333;
+  line-height: 1.5;
 }
 
 .cookie-box a {
   color: #00bfff;
+  font-weight: 600;
   text-decoration: underline;
 }
 
 .cookie-buttons {
   display: flex;
-  gap: 15px;
   justify-content: center;
-  flex-wrap: wrap;
+  gap: 25px;
 }
 
 .cookie-buttons button {
-  background-color: #004466;
-  border-radius: 20px;
-  padding: 10px 20px;
-  color: white;
-  font-weight: bold;
+  background-color: #00bfff;
+  border-radius: 40px;
   border: none;
+  color: white;
+  padding: 15px 50px;
+  font-size: 1.4rem;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .cookie-buttons button:hover {
-  background-color: #006699;
+  background-color: #0099cc;
 }
 
-@media (max-width: 500px) {
-  .cookie-box {
-    padding: 20px;
-  }
+/* Botón Rechazar más visible y rojo */
+#btn-reject-cookies {
+  background-color: #e63946;
+}
 
-  .cookie-buttons {
-    flex-direction: column;
+#btn-reject-cookies:hover {
+  background-color: #c5303e;
+}
+
+/* Para que los botones sean más grandes en pantallas pequeñas */
+@media (max-width: 600px) {
+  .cookie-box {
+    padding: 40px 30px;
   }
 
   .cookie-buttons button {
-    width: 100%;
+    padding: 15px 40px;
+    font-size: 1.2rem;
   }
 }
 
