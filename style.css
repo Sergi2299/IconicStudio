@@ -170,7 +170,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Aviso de cookies en pantalla completa */
+/* Modal cookies */
 .cookie-consent {
   position: fixed;
   top: 0;
@@ -229,7 +229,7 @@ footer {
   background-color: #0099cc;
 }
 
-/* Botón Rechazar más visible y rojo */
+/* Botón Rechazar en rojo */
 #btn-reject-cookies {
   background-color: #e63946;
 }
@@ -238,7 +238,7 @@ footer {
   background-color: #c5303e;
 }
 
-/* Para que los botones sean más grandes en pantallas pequeñas */
+/* Responsive cookies */
 @media (max-width: 600px) {
   .cookie-box {
     padding: 40px 30px;
@@ -249,4 +249,3 @@ footer {
     font-size: 1.2rem;
   }
 }
-
