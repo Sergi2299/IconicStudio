@@ -4,9 +4,105 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Política de Privacidad - Iconic Studio</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <style>
+    /* Reset y básicos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0f0f0f;
+      color: #dcdcdc;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    header {
+      background-color: #111;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .logo-img {
+      width: 80px;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+    .logo-img:hover {
+      transform: scale(1.1);
+    }
+    .header-texto h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+    .header-texto p {
+      margin: 5px 0 0 0;
+      font-style: italic;
+    }
+    @media (max-width: 600px) {
+      .logo-img {
+        width: 60px;
+      }
+      .header-texto h1 {
+        font-size: 1.5rem;
+      }
+      .header-texto p {
+        font-size: 0.9rem;
+      }
+    }
+    nav {
+      background-color: #222;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #00bfff;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+      color: #dcdcdc;
+    }
+    footer {
+      background-color: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -23,30 +119,14 @@
     <a href="index.html">Inicio</a>
     <a href="aviso-legal.html">Aviso Legal</a>
     <a href="politica-cookies.html">Política de Cookies</a>
-    <a href="privacidad.html">Política de Privacidad</a>
+    <a href="privacidad.html" class="active">Privacidad</a>
   </nav>
 
   <main>
     <section>
       <h2>Política de Privacidad</h2>
       <p>
-        En Iconic Studio nos comprometemos a proteger tu privacidad y a cumplir con la legislación vigente en materia de protección de datos personales.
-      </p>
-      <h3>Datos que recopilamos</h3>
-      <p>
-        Recopilamos los datos que nos proporcionas a través de nuestros formularios de contacto, como nombre, correo electrónico y mensajes.
-      </p>
-      <h3>Finalidad del tratamiento</h3>
-      <p>
-        Utilizamos tus datos para responder a tus consultas, enviar información relacionada con nuestros servicios y mejorar nuestra web.
-      </p>
-      <h3>Seguridad de los datos</h3>
-      <p>
-        Adoptamos medidas técnicas y organizativas para proteger tus datos contra accesos no autorizados, pérdida o alteración.
-      </p>
-      <h3>Tus derechos</h3>
-      <p>
-        Puedes ejercer tus derechos de acceso, rectificación, cancelación y oposición enviando un correo a contacto@iconicstudio.com.
+        Aquí va el texto de la Política de Privacidad con la información sobre el tratamiento de datos personales, derechos del usuario y contacto del responsable.
       </p>
     </section>
   </main>
