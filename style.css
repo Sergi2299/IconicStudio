@@ -229,23 +229,5 @@ footer {
   background-color: #0099cc;
 }
 
-/* Botón Rechazar en rojo */
-#btn-reject-cookies {
-  background-color: #e63946;
-}
+/* Botón Rech*
 
-#btn-reject-cookies:hover {
-  background-color: #c5303e;
-}
-
-/* Responsive cookies */
-@media (max-width: 600px) {
-  .cookie-box {
-    padding: 40px 30px;
-  }
-
-  .cookie-buttons button {
-    padding: 15px 40px;
-    font-size: 1.2rem;
-  }
-}
