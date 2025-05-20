@@ -68,19 +68,19 @@
     &copy; 2025 Iconic Studio. Todos los derechos reservados.
   </footer>
 
-  <!-- Modal de Cookies -->
-  <div class="cookie-overlay" id="cookie-overlay"></div>
-  <div class="cookie-modal" id="cookie-consent">
-    <div class="cookie-box">
-      <p>
-        Este sitio usa cookies para mejorar tu experiencia. Consulta nuestra
-        <a href="#">Política de Privacidad</a> y <a href="#">Términos y Condiciones</a>.
-      </p>
-      <div class="cookie-buttons">
-        <button id="btn-accept-cookies">Aceptar</button>
-        <button id="btn-decline-cookies">Rechazar</button>
-        <button id="btn-settings-cookies">Configurar preferencias</button>
-      </div>
+  <!-- Overlay oscuro para bloquear la página cuando el modal de cookies esté visible -->
+  <div id="cookie-overlay" class="cookie-overlay"></div>
+
+  <!-- Modal de Cookies centrado -->
+  <div id="cookie-modal" class="cookie-modal">
+    <p>
+      Este sitio usa cookies para mejorar tu experiencia. Consulta nuestra
+      <a href="#">Política de Privacidad</a> y <a href="#">Términos y Condiciones</a>.
+    </p>
+    <div class="cookie-buttons">
+      <button id="btn-accept-cookies">Aceptar</button>
+      <button id="btn-decline-cookies">Rechazar</button>
+      <button id="btn-settings-cookies">Configurar preferencias</button>
     </div>
   </div>
 
@@ -132,9 +132,8 @@
       });
     });
 
-    // --- COOKIES ---
-
-    const cookieModal = document.getElementById("cookie-consent");
+    // Cookies modal
+    const cookieModal = document.getElementById("cookie-modal");
     const cookieOverlay = document.getElementById("cookie-overlay");
     const btnAccept = document.getElementById("btn-accept-cookies");
     const btnDecline = document.getElementById("btn-decline-cookies");
@@ -142,15 +141,6 @@
 
     function setCookieConsent(value) {
       localStorage.setItem("cookieConsent", value);
-      ocultarModalCookies();
-    }
-
-    function mostrarModalCookies() {
-      cookieModal.style.display = "block";
-      cookieOverlay.style.display = "block";
-    }
-
-    function ocultarModalCookies() {
       cookieModal.style.display = "none";
       cookieOverlay.style.display = "none";
     }
@@ -158,7 +148,8 @@
     window.addEventListener("DOMContentLoaded", () => {
       const consent = localStorage.getItem("cookieConsent");
       if (!consent) {
-        mostrarModalCookies();
+        cookieModal.style.display = "block";
+        cookieOverlay.style.display = "block";
       }
     });
 
@@ -177,6 +168,3 @@
   </script>
 </body>
 </html>
-
-
-
