@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Iconic Studio - Diseño de logos y desarrollo web profesional adaptado a tu marca." />
   <title>Iconic Studio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
@@ -13,7 +11,7 @@
 <body>
   <header>
     <div class="header-container">
-      <img src="logo.png" alt="Logo de Iconic Studio" class="logo-img" />
+      <img src="logo.png" alt="Iconic Studio Logo" class="logo-img" />
       <div class="header-texto">
         <h1>Iconic Studio</h1>
         <p>Tú imagina, nosotros creamos</p>
@@ -27,7 +25,6 @@
     <a href="#contacto">Contacto</a>
   </nav>
 
-  <!-- Sección Servicios -->
   <section id="servicios">
     <h2>¿Qué ofrecemos?</h2>
     <div class="servicio">
@@ -40,32 +37,23 @@
     </div>
   </section>
 
-  <!-- Sección Galería -->
   <section id="galeria">
     <h2>Proyectos recientes</h2>
     <div class="imagenes">
-      <img src="logo1.jpg" alt="Diseño de logo para empresa A" />
-      <img src="logo2.jpg" alt="Logo corporativo para startup creativa" />
-      <img src="logo3.png" alt="Ejemplo de logo moderno para cliente" />
+      <img src="logo1.jpg" alt="Logo 1" />
+      <img src="logo2.jpg" alt="Logo 2" />
+      <img src="logo3.png" alt="Logo 3" />
     </div>
   </section>
 
-  <!-- Sección Contacto -->
   <section id="contacto">
     <h2>Contáctanos</h2>
     <form id="formulario-contacto">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu email" required />
+      <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
 
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="email" placeholder="Tu email" required />
-
-      <label for="mensaje">Mensaje:</label>
-      <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje..." rows="5" required></textarea>
-
-      <label for="captcha-input" class="captcha-label">
-        Escribe el número: <span id="captcha-code"></span>
-      </label>
+      <label for="captcha-input" class="captcha-label">Escribe el número: <span id="captcha-code"></span></label>
       <input type="text" id="captcha-input" name="captcha" placeholder="Ejemplo: 1234" required pattern="\d{4}" maxlength="4" />
 
       <button type="submit">Enviar mensaje</button>
@@ -81,6 +69,7 @@
   </footer>
 
   <!-- Modal de Cookies -->
+  <div class="cookie-overlay" id="cookie-overlay"></div>
   <div class="cookie-modal" id="cookie-consent">
     <div class="cookie-box">
       <p>
@@ -95,88 +84,7 @@
     </div>
   </div>
 
-  <script>
-    // CAPTCHA
-    const captchaCodeEl = document.getElementById("captcha-code");
-    let currentCaptcha = "";
-
-    function generarCaptcha() {
-      currentCaptcha = "";
-      for (let i = 0; i < 4; i++) {
-        currentCaptcha += Math.floor(Math.random() * 10);
-      }
-      captchaCodeEl.textContent = currentCaptcha;
-    }
-
-    generarCaptcha();
-
-    document.getElementById("formulario-contacto").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const captchaInput = document.getElementById("captcha-input").value.trim();
-
-      if (captchaInput !== currentCaptcha) {
-        alert("Captcha incorrecto.");
-        generarCaptcha();
-        return;
-      }
-
-      const formData = new FormData(this);
-      fetch("https://formsubmit.co/ajax/sergifenollar88@gmail.com", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json"
-        }
-      }).then(response => {
-        if (response.ok) {
-          this.reset();
-          generarCaptcha();
-          document.getElementById("mensaje-enviado").style.display = "block";
-          setTimeout(() => {
-            document.getElementById("mensaje-enviado").style.display = "none";
-          }, 5000);
-        } else {
-          alert("Error al enviar el mensaje.");
-        }
-      }).catch(() => {
-        alert("Fallo al enviar el formulario.");
-      });
-    });
-
-    // Cookies
-    const cookieModal = document.getElementById("cookie-consent");
-    const btnAccept = document.getElementById("btn-accept-cookies");
-    const btnDecline = document.getElementById("btn-decline-cookies");
-    const btnSettings = document.getElementById("btn-settings-cookies");
-
-    function setCookieConsent(value) {
-      localStorage.setItem("cookieConsent", value);
-      cookieModal.style.display = "none";
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const consent = localStorage.getItem("cookieConsent");
-      if (!consent) {
-        cookieModal.style.display = "flex";
-      }
-    });
-
-    btnAccept.addEventListener("click", () => {
-      setCookieConsent("true");
-    });
-
-    btnDecline.addEventListener("click", () => {
-      setCookieConsent("false");
-    });
-
-    btnSettings.addEventListener("click", () => {
-      alert("Opciones avanzadas próximamente.");
-      setCookieConsent("custom");
-    });
-  </script>
-</body>
-</html>
-
+  <script src="script.js"></script>
 </body>
 </html>
 
